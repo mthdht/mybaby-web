@@ -10,8 +10,9 @@ const routes = [
   ]
   
 const router = createRouter({
-history: createMemoryHistory(),
-routes,
+    history: createMemoryHistory(),
+    routes,
+    linkActiveClass: 'border-b-4 border-sky-500 text-sky-600',
 })
 
 createApp(App).use(router).mount('#app')
