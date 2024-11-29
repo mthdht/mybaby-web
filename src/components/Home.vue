@@ -18,7 +18,12 @@
         </section>
 
         <section class="font-semibold">
-            <h3 class="font-bold mb-4 text-xl">Dernière activités</h3>
+            <h3 class="font-bold mb-4 text-xl flex justify-between">
+                <span>Dernière activités</span>
+                <button class="rounded bg-emerald-500 text-white text-sm px-2 py-1 flex gap-2 items-center">
+                    Ajouter <plusIcon class="size-6 stroke-2"></plusIcon>
+                </button>
+            </h3>
             <ul class="space-y-2">
                 <li class="flex gap-6 bg-sky-50 px-3 py-2 items-center rounded shadow">
                     <div class="icon">
@@ -66,6 +71,6 @@
 
 <script setup>
 import FoodIcon from './FoodIcon.vue'
-import Test from './Test.vue'
+import { PlusIcon } from '@heroicons/vue/24/outline'
 
 </script>
