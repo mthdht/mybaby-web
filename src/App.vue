@@ -9,29 +9,44 @@
       </nav>
     </div>
   </header>
-  <RouterView></RouterView>
 
-  <footer class="bg-slate-100 flex divide-x divide-slate-200 fixed w-full bottom-0">
-    <RouterLink to="/" class="py-1 w-1/3 flex flex-col justify-center items-center">
-        <HomeModernIcon class="size-7"></HomeModernIcon>
+  <header class="relative flex justify-between items-center bg-sky-500 py-4 px-8 text-white">
+      <div class="brand font-semibold text-xl">My Baby</div>
+      <nav class="flex gap-4 ">
+          <RouterLink to="/notifications">
+            <BellIcon class="size-6"></BellIcon>
+          </RouterLink>
+
+          <RouterLink to="/notifications">
+            <UserIcon class="size-6"></UserIcon>
+          </RouterLink>
+      </nav>
+  </header>
+  <main>
+    <RouterView></RouterView>
+  </main>
+
+  <footer class="bg-slate-100 flex fixed w-full bottom-0">
+    <RouterLink to="/" class="py-1 w-1/3 flex flex-col justify-center items-center border-b-4">
+        <HomeModernIcon class="size-7 stroke-2"></HomeModernIcon>
         <p class="font-bold text-xs">Home</p>
     </RouterLink>
 
-    <RouterLink to="/ok" class="py-1 w-1/3 flex flex-col justify-center items-center">
-      <ArrowTrendingUpIcon class="size-7"></ArrowTrendingUpIcon>
-      <p class="font-bold text-xs">Suivi</p>
+    <RouterLink to="/child-centers" class="py-1 w-1/3 flex flex-col justify-center items-center border-b-4">
+      <ArrowTrendingUpIcon class="size-7 stroke-2"></ArrowTrendingUpIcon>
+      <p class="font-bold text-xs">Crèches</p>
     </RouterLink>
 
-    <RouterLink to="/ok1" class="py-1 w-1/3 flex flex-col justify-center items-center">
-      <HeartIcon class="size-7"></HeartIcon>
-      <p class="font-bold text-xs">Favoris</p>      
+    <RouterLink to="/children" class="py-1 w-1/3 flex flex-col justify-center items-center border-b-4">
+      <UserGroupIcon class="size-7 stroke-2"></UserGroupIcon>
+      <p class="font-bold text-xs">Enfants</p>      
     </RouterLink>
   </footer>
 </template>
 
 <script setup>
 import { RouterLink } from 'vue-router';
-import { HomeModernIcon, ArrowTrendingUpIcon, HeartIcon } from '@heroicons/vue/24/outline'
+import { HomeModernIcon, ArrowTrendingUpIcon, HeartIcon, BellIcon, UserIcon, UserGroupIcon } from '@heroicons/vue/24/outline'
 
 </script>
 

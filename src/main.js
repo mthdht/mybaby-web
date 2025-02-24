@@ -3,10 +3,14 @@ import './style.css'
 import App from './App.vue'
 
 import { createMemoryHistory, createRouter } from 'vue-router'
-import Home from './components/Home.vue'
+import Home from './pages/Home.vue'
+import ChildCenters from './pages/ChildCenter.vue'
+import Children from './pages/Children.vue'
 
 const routes = [
     { path: '/', component: Home },
+    { path: '/child-centers', component: ChildCenters },
+    { path: '/children', component: Children },
   ]
   
 const router = createRouter({
