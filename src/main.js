@@ -17,6 +17,7 @@ const router = createRouter({
     history: createMemoryHistory(),
     routes,
     linkActiveClass: 'border-b-4 border-sky-500 text-sky-600',
+    linkExactActiveClass: ' border-b-4 border-indigo-700',
 })
 
 createApp(App).use(router).mount('#app')
