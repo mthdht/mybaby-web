@@ -22,36 +22,35 @@
       <!-- Accès rapide -->
       <section class="menu grid grid-cols-2 md:grid-cols-4 gap-4">
          <RouterLink to="/journaux" class="hover:bg-sky-50 aspect-square border shadow flex flex-col items-center justify-center gap-2 rounded-lg bg-white transition-colors hover:border-sky-200">
-            <ClipboardDocumentListIcon class="size-14 stroke-2 text-sky-500"></ClipboardDocumentListIcon>
+            <ClipboardDocumentListIcon class="size-14 stroke- text-sky-500"></ClipboardDocumentListIcon>
             <p>Journaux</p>
          </RouterLink>
 
          <RouterLink to="/messages" class="aspect-square border shadow flex flex-col items-center justify-center gap-2 rounded-lg bg-white transition-colors hover:bg-emerald-50 hover:border-emerald-200">
-            <ChatBubbleLeftRightIcon class="size-14 stroke-2 text-emerald-500"></ChatBubbleLeftRightIcon>
+            <ChatBubbleLeftRightIcon class="size-14 stroke- text-emerald-500"></ChatBubbleLeftRightIcon>
             <p>Messages</p>
          </RouterLink>
 
          <RouterLink to="/equipes" class="aspect-square border shadow flex flex-col items-center justify-center gap-2 rounded-lg bg-white transition-colors hover:bg-purple-50 hover:border-purple-200">
-            <UsersIcon class="size-14 stroke-2 text-purple-600"></UsersIcon>
+            <UsersIcon class="size-14 stroke- text-purple-600"></UsersIcon>
             <p>Équipes</p>
          </RouterLink>
 
          <RouterLink to="/notes" class="aspect-square border shadow flex flex-col items-center justify-center gap-2 rounded-lg bg-white transition-colors hover:bg-yellow-50 hover:border-yellow-200">
-            <BookmarkIcon class="size-14 stroke-2 text-yellow-600"></BookmarkIcon>
+            <BookmarkIcon class="size-14 stroke- text-yellow-600"></BookmarkIcon>
             <p>Notes</p>
          </RouterLink>
       </section>
 
       <!-- Dernière alerte -->
-      <section class="last-alert bg-white shadow rounded-lg p-4 flex items-center justify-between hover:bg-sky-50 transition-colors">
-         <div class="flex items-center gap-3">
-            <ChatBubbleLeftRightIcon class="size-14 text-sky-500"></ChatBubbleLeftRightIcon>
-            <p class="text-sm font-semibold text-sky-700">Nouveau message d'un parent</p>
-         </div>
-         <RouterLink to="/notifications" class="text-sky-500 font-semibold">Voir</RouterLink>
+      <section>
+         <RouterLink to="/notifications/id">
+            <div class="last-alert bg-white shadow rounded-lg p-4 flex gap-4 items-center hover:bg-sky-50 transition-colors">
+               <ChatBubbleLeftRightIcon class="size-10 text-emerald-500"></ChatBubbleLeftRightIcon>
+               <p class="font-semibold">Nouveau message d'un parent</p>
+            </div>
+         </RouterLink>
       </section>
-
-
    </div>
 </template>
 
