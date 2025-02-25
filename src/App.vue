@@ -28,25 +28,25 @@
 
   <footer class="bg-slate-100 flex fixed w-full bottom-0">
     <RouterLink to="/" class="py-1 w-1/3 flex flex-col justify-center items-center border-b-4">
-        <HomeModernIcon class="size-7 stroke-2"></HomeModernIcon>
+        <HomeIcon class="size-7 stroke-2"></HomeIcon>
         <p class="font-bold text-xs">Home</p>
-    </RouterLink>
-
-    <RouterLink to="/child-centers" class="py-1 w-1/3 flex flex-col justify-center items-center border-b-4">
-      <ArrowTrendingUpIcon class="size-7 stroke-2"></ArrowTrendingUpIcon>
-      <p class="font-bold text-xs">Crèches</p>
     </RouterLink>
 
     <RouterLink to="/children" class="py-1 w-1/3 flex flex-col justify-center items-center border-b-4">
       <UserGroupIcon class="size-7 stroke-2"></UserGroupIcon>
       <p class="font-bold text-xs">Enfants</p>      
     </RouterLink>
+    
+    <RouterLink to="/child-centers" class="py-1 w-1/3 flex flex-col justify-center items-center border-b-4">
+      <BuildingStorefrontIcon class="size-7 stroke-2"></BuildingStorefrontIcon>
+      <p class="font-bold text-xs">Crèches</p>
+    </RouterLink>
   </footer>
 </template>
 
 <script setup>
 import { RouterLink } from 'vue-router';
-import { HomeModernIcon, ArrowTrendingUpIcon, HeartIcon, BellIcon, UserIcon, UserGroupIcon } from '@heroicons/vue/24/outline'
+import { HomeIcon, ArrowTrendingUpIcon, HeartIcon, BellIcon, UserIcon, UserGroupIcon, BuildingStorefrontIcon } from '@heroicons/vue/24/outline'
 
 </script>
 
