@@ -1,7 +1,11 @@
 <template>
     <div class="p-4 space-y-6">
         <section class="filters flex gap-4">
-            <Select v-model="filters.creche" :options="['creche 1', 'creche 2']"></Select>
+            <Select v-model="filters.creche" :options="['creche 1', 'creche 2']" class="grow"></Select>
+            <Select v-model="filters.sort" :options="['Nom', 'Prénom']" class="grow"></Select>
+            <button class="bg-emerald-500 px-3 py-1 rounded shadow">
+                <UserPlusIcon class="size-7 text-white"></UserPlusIcon>
+            </button>
         </section>
 
         <section class="children grid grid-cols-3 gap-4">
@@ -15,9 +19,11 @@
 <script setup>
 import { computed, reactive } from 'vue'
 import Select from '../components/Select.vue'
+import { UserPlusIcon } from '@heroicons/vue/24/outline';
 
 const filters = reactive({
-    creche: "creche 1"
+    creche: "creche 1",
+    sort: "Trier par"
 })
 
 const children = [
