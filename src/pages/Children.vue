@@ -5,25 +5,29 @@
             Gerer les enfants !
         </h2>
 
-        <section class="filters flex justify-between">
-            <Select v-model="filters.creche" :options="['creche 1', 'creche 2']" class="w-2/5"></Select>
-            <Select v-model="filters.sort" :options="['name', 'sexe']" placeholder="Trier par" class="w-2/5"></Select>
-            
-            <button class="bg-emerald-500 px-3 py-1 rounded shadow">
-                <UserPlusIcon class="size-7 text-white"></UserPlusIcon>
-            </button>
-        </section>
+        <div class="wrapper space-y-4">
+            <section class="search"></section>
 
-        <section class="children grid grid-cols-3 gap-4">
-            <div class="child aspect-square border shadow flex flex-col justify-between items-center p-2 relative rounded" v-for="(child, index) in filteredChildren">
-                <div class="badge absolute top-2 left-2 size-4 bg-sky-500 rounded-full"
-                    :class="[child.sexe == 'male' ? 'bg-sky-500' : 'bg-pink-500']"></div>
-
-                <div class="avatar self-center size-16 rounded-full border"></div>
+            <section class="filters flex justify-between">
+                <Select v-model="filters.creche" :options="[{label: 'Creche 1', value: 'creche 1'}, {label: 'Creche 2', value: 'creche 2'}]" class="w-2/5"></Select>
+                <Select v-model="filters.sort" :options="[{label: 'Nom', value: 'name'}, {label: 'Sexe', value: 'sexe'}]" placeholder="Trier par" class="w-2/5"></Select>
                 
-                <span class="font-semibold">{{  child.name }}</span>
-            </div>
-        </section>
+                <button class="bg-emerald-500 px-3 py-1 rounded shadow">
+                    <UserPlusIcon class="size-7 text-white"></UserPlusIcon>
+                </button>
+            </section>
+
+            <section class="children grid grid-cols-3 gap-4">
+                <div class="child aspect-square border shadow flex flex-col justify-between items-center p-2 relative rounded" v-for="(child, index) in filteredChildren">
+                    <div class="badge absolute top-2 left-2 size-4 bg-sky-500 rounded-full"
+                    :class="[child.sexe == 'male' ? 'bg-sky-500' : 'bg-pink-500']"></div>
+                    
+                    <div class="avatar self-center size-16 rounded-full border"></div>
+                    
+                    <span class="font-semibold">{{  child.name }}</span>
+                </div>
+            </section>
+        </div>
     </div>
 </template>
 
