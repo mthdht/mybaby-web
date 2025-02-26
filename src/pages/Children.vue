@@ -5,9 +5,10 @@
             Gerer les enfants !
         </h2>
 
-        <section class="filters flex gap-4">
-            <Select v-model="filters.creche" :options="['creche 1', 'creche 2']" class="grow"></Select>
-            <Select v-model="filters.sort" :options="['Nom', 'Prénom']" class="grow"></Select>
+        <section class="filters flex justify-between">
+            <Select v-model="filters.creche" :options="['creche 1', 'creche 2']" class="w-2/5"></Select>
+            <Select v-model="filters.sort" :options="['name', 'sexe']" placeholder="Trier par" class="w-2/5"></Select>
+            
             <button class="bg-emerald-500 px-3 py-1 rounded shadow">
                 <UserPlusIcon class="size-7 text-white"></UserPlusIcon>
             </button>
@@ -29,11 +30,12 @@
 <script setup>
 import { computed, reactive } from 'vue'
 import Select from '../components/Select.vue'
+import Selecte from '../components/Selecte.vue'
 import { UserPlusIcon, UserIcon } from '@heroicons/vue/24/outline';
 
 const filters = reactive({
     creche: "creche 1",
-    sort: "Trier par"
+    sort: ""
 })
 
 const children = [
@@ -50,7 +52,7 @@ const children = [
         sexe: 'female'
     },
     {
-        name: "Stephanie",
+        name: "Lucie",
         creche: "creche 2",
         age: "6 mois",
         sexe: 'female'
@@ -74,12 +76,16 @@ const children = [
         sexe: 'male'
     },
     {
-        name: "Stephanie",
-        age: "6 mois"
+        name: "Quentin",
+        creche: "creche 2",
+        age: "6 mois",
+        sexe: 'male'
     },
     {
-        name: "Stephanie",
-        age: "6 mois"
+        name: "Anne",
+        creche: "creche 2",
+        age: "6 mois",
+        sexe: 'female'
     },
     {
         name: "Stephanie"
@@ -136,6 +142,6 @@ const children = [
 ]
 
 const filteredChildren = computed(() => {
-    return children.filter(child => child.creche == filters.creche)
+    return children.filter(child => child.creche == filters.creche).toSorted((a, b) => a[filters.sort]?.localeCompare(b[filters.sort]))
 })
 </script>

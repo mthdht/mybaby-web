@@ -1,13 +1,19 @@
 <template>
     <div class="select-wrapper relative">
-        <div class="select px-3 py-1 rounded border flex gap-2 items-center font-semibold shadow" @click="showOptions = !showOptions">
-            <p>{{  model }}</p>
+        <button class="select px-3 py-1 rounded border flex justify-between items-center font-semibold shadow w-full cursor-pointer" @click="showOptions = !showOptions">
+            <p>{{  model || props.placeholder }}</p>
             <ChevronDownIcon class="size-5 stroke-2"></ChevronDownIcon>
-        </div>
-        
-        <div class="options mt-2 rounded border divide-y absolute bg-white min-w-40 shadow z-50" v-show="showOptions">
-            <div class="option px-3 py-1 hover:bg-slate-50" v-for="option in options" @click="chooseOption(option)">{{ option }}</div>
-        </div>
+        </button>
+        <transition
+            enter-active-class="transition duration-500 ease-out"
+            enter-from-class="opacity-0 -translate-y-1"
+            leave-active-class="transition duration-500 ease-in"
+            leave-to-class="opacity-0 -translate-y-1"
+        >
+            <div class="options mt-2 rounded border divide-y absolute bg-white min-w-40 w-full shadow z-50" v-show="showOptions">
+                <div class="option px-3 py-1 hover:bg-slate-50" v-for="option in options" @click="chooseOption(option)">{{ option }}</div>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -19,6 +25,10 @@ const props = defineProps({
     options: {
         type: Array,
         default: () => []
+    },
+    placeholder: {
+        type: String,
+        default: 'Please select an item'
     }
 })
 const model = defineModel()
