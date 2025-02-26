@@ -4,6 +4,7 @@
             <p>{{  model || props.placeholder }}</p>
             <ChevronDownIcon class="size-5 stroke-2"></ChevronDownIcon>
         </button>
+        
         <transition
             enter-active-class="transition duration-500 ease-out"
             enter-from-class="opacity-0 -translate-y-1"

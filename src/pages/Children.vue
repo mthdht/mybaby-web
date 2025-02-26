@@ -17,7 +17,12 @@
                 </button>
             </section>
 
-            <section class="children grid grid-cols-3 gap-4">
+            <p v-if="filteredChildren.length === 0" class="flex gap-4 items-center text-gray-500 border p-4 rounded">
+                <ExclamationCircleIcon class="size-7 text-yellow-500"></ExclamationCircleIcon>
+                Aucun enfant trouvé pour ces critères.
+            </p>
+
+            <section class="children grid grid-cols-3 gap-4" v-else>
                 <div class="child aspect-square border shadow flex flex-col justify-between items-center p-2 relative rounded" v-for="(child, index) in filteredChildren">
                     <div class="badge absolute top-2 left-2 size-4 bg-sky-500 rounded-full"
                     :class="[child.sexe == 'male' ? 'bg-sky-500' : 'bg-pink-500']"></div>
@@ -34,8 +39,7 @@
 <script setup>
 import { computed, reactive } from 'vue'
 import Select from '../components/Select.vue'
-import Selecte from '../components/Selecte.vue'
-import { UserPlusIcon, UserIcon } from '@heroicons/vue/24/outline';
+import { UserPlusIcon, UserIcon, ExclamationCircleIcon } from '@heroicons/vue/24/outline';
 
 const filters = reactive({
     creche: "creche 1",
@@ -91,61 +95,11 @@ const children = [
         age: "6 mois",
         sexe: 'female'
     },
-    {
-        name: "Stephanie"
-    },
-    {
-        name: "Stephanie"
-    },
-    {
-        name: "Stephanie"
-    },
-    {
-        name: "Stephanie"
-    },
-    {
-        name: "Stephanie"
-    },
-    {
-        name: "Stephanie"
-    },
-    {
-        name: "Stephanie"
-    },
-    {
-        name: "Stephanie"
-    },
-    {
-        name: "Stephanie"
-    },
-    {
-        name: "Stephanie"
-    },
-    {
-        name: "Stephanie"
-    },
-    {
-        name: "Stephanie"
-    },
-    {
-        name: "Stephanie"
-    },
-    {
-        name: "Stephanie"
-    },
-    {
-        name: "Stephanie"
-    },
-    {
-        name: "Stephanie"
-    },
-    {
-        name: "Stephanie"
-    },
 
 ]
 
 const filteredChildren = computed(() => {
-    return children.filter(child => child.creche == filters.creche).toSorted((a, b) => a[filters.sort]?.localeCompare(b[filters.sort]))
+    return []
+    return children.filter(child => child.creche == filters.creche).slice().sort((a, b) => a[filters.sort]?.localeCompare(b[filters.sort]))
 })
 </script>
