@@ -44,6 +44,8 @@
                 </div>
             </section>
         </div>
+
+        <RouterLink to="/children/child">child detail</RouterLink>
     </div>
 </template>
 
@@ -51,6 +53,7 @@
 import { computed, reactive } from 'vue'
 import Select from '../components/Select.vue'
 import { UserPlusIcon, UserIcon, ExclamationCircleIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline';
+import { RouterLink } from 'vue-router';
 
 const filters = reactive({
     creche: "creche 1",
