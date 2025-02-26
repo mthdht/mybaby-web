@@ -5,7 +5,7 @@
             <ChevronDownIcon class="size-5 stroke-2"></ChevronDownIcon>
         </div>
         
-        <div class="options mt-2 rounded border divide-y absolute bg-white min-w-40 shadow" v-show="showOptions">
+        <div class="options mt-2 rounded border divide-y absolute bg-white min-w-40 shadow z-50" v-show="showOptions">
             <div class="option px-3 py-1 hover:bg-slate-50" v-for="option in options" @click="chooseOption(option)">{{ option }}</div>
         </div>
     </div>
