@@ -1,12 +1,21 @@
 <template>
-    <div class="p-4 space-y-6">
+    <div class="p-4 space-y-4">
         <h2 class="font-semibold text-xl flex gap-3">
             <UserIcon class="size-7 text-indigo-500"></UserIcon>
             Gerer les enfants !
         </h2>
 
-        <div class="wrapper space-y-4">
-            <section class="search"></section>
+        <div class="wrapper space-y-3">
+            
+            <section class="search relative">
+                <MagnifyingGlassIcon class="size-6 absolute text-slate-500 m-[9px]"></MagnifyingGlassIcon>
+                <input 
+                    v-model="filters.search" 
+                    type="text" 
+                    placeholder="Rechercher un enfant..." 
+                    class="w-full px-3 py-2 pl-9 border rounded shadow focus:ring focus:outline-sky-500 focus-visible:outline-none"
+                >
+            </section>
 
             <section class="filters flex justify-between">
                 <Select v-model="filters.creche" :options="[{label: 'Creche 1', value: 'creche 1'}, {label: 'Creche 2', value: 'creche 2'}]" class="w-2/5"></Select>
@@ -27,7 +36,9 @@
                     <div class="badge absolute top-2 left-2 size-4 bg-sky-500 rounded-full"
                     :class="[child.sexe == 'male' ? 'bg-sky-500' : 'bg-pink-500']"></div>
                     
-                    <div class="avatar self-center size-16 rounded-full border"></div>
+                    <div class="avatar self-center size-16 rounded-full border overflow-hidden">
+                        <img :src="child.avatar || 'ok'" alt="" class="size-full object-cover">
+                    </div>
                     
                     <span class="font-semibold">{{  child.name }}</span>
                 </div>
@@ -39,11 +50,12 @@
 <script setup>
 import { computed, reactive } from 'vue'
 import Select from '../components/Select.vue'
-import { UserPlusIcon, UserIcon, ExclamationCircleIcon } from '@heroicons/vue/24/outline';
+import { UserPlusIcon, UserIcon, ExclamationCircleIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline';
 
 const filters = reactive({
     creche: "creche 1",
-    sort: ""
+    sort: "",
+    search: ""
 })
 
 const children = [
@@ -99,7 +111,10 @@ const children = [
 ]
 
 const filteredChildren = computed(() => {
-    return []
-    return children.filter(child => child.creche == filters.creche).slice().sort((a, b) => a[filters.sort]?.localeCompare(b[filters.sort]))
+    return children
+        .filter(child => child.creche == filters.creche)
+        .filter(child => child.name.toLowerCase().includes(filters.search.toLowerCase()))
+        .slice()
+        .sort((a, b) => a[filters.sort]?.localeCompare(b[filters.sort]))
 })
 </script>
