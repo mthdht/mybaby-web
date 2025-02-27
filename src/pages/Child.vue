@@ -41,8 +41,50 @@
 
       <div v-if="activeTab === 'journal'">
         <!-- Liste des activités -->
-        <div class="activity-card bg-sky-100 p-4 rounded shadow">
-          <Accordion label="Lundi 24 Février 2025" open>
+        <div class="space-y-4">
+          <Accordion label="Lundi 24 Février 2025" open class="bg-sky-100 activity-card p-4 rounded shadow ">
+            <ul class="space-y-4">
+              <li class="flex gap-2">
+                <span class="font-semibold w-12">14h15:</span>
+                <ArrowPathIcon class="size-5"> </ArrowPathIcon>
+                <p class="">
+                  <span class="border-b-2 border-slate-500">Change</span>: <span class="italic">Selles</span> 
+                </p>
+              </li>
+
+              <li class="flex gap-2">
+                <span class="font-semibold w-12">12h15:</span>
+                <CakeIcon class="size-6"> </CakeIcon>
+                <p class="">
+                  <span class="border-b-2 border-slate-500">Repas</span>: <span class="italic">Pomme de terre, poissons, légumes</span> 
+                </p>
+              </li>
+
+              <li class="flex gap-2">
+                <span class="font-semibold w-12">10h45:</span>
+                <MoonIcon class="size-5"> </MoonIcon>
+                <p>
+                  <span class="border-b-2 border-slate-500">Sieste</span> 1h30
+                </p>
+              </li>
+            </ul>
+          </Accordion>
+
+          <Accordion label="Vendredi 21 Février 2025" class="bg-sky-100 activity-card p-4 rounded shadow ">
+            <ul>
+              <li>Repas: <span>10h30 - Purée de légumes</span></li>
+              <li>Coucher: <span>12h - Sieste de 2 heures</span></li>
+            </ul>
+          </Accordion>
+
+          <Accordion label="Jeudi 22 Février 2025" class="bg-sky-100 activity-card p-4 rounded shadow ">
+            <ul>
+              <li>Repas: <span>10h30 - Purée de légumes</span></li>
+              <li>Coucher: <span>12h - Sieste de 2 heures</span></li>
+            </ul>
+          </Accordion>
+
+          <Accordion label="Mercredi 23 Février 2025" class="bg-sky-100 activity-card p-4 rounded shadow ">
             <ul>
               <li>Repas: <span>10h30 - Purée de légumes</span></li>
               <li>Coucher: <span>12h - Sieste de 2 heures</span></li>
@@ -73,6 +115,7 @@
 <script setup>
 import { ref } from 'vue'
 import Accordion from '../components/Accordion.vue';
+import { ArrowPathIcon, CakeIcon, MoonIcon } from '@heroicons/vue/24/outline';
 
 const child = {
   name: "Henry Dubois",
