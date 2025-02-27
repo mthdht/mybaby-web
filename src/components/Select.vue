@@ -6,9 +6,9 @@
         </button>
         
         <transition
-            enter-active-class="transition duration-500 ease-out"
+            enter-active-class="transition duration-300 ease-out"
             enter-from-class="opacity-0 -translate-y-1"
-            leave-active-class="transition duration-500 ease-in"
+            leave-active-class="transition duration-300 ease-in"
             leave-to-class="opacity-0 -translate-y-1"
         >
             <ul class="options mt-2 rounded border divide-y absolute bg-white w-full shadow z-50" v-show="showOptions">

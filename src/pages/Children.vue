@@ -33,7 +33,7 @@
 
             <section class="children grid grid-cols-3 gap-4" v-else>
                 <div class="child aspect-square border shadow flex flex-col justify-between items-center p-2 relative rounded" v-for="(child, index) in filteredChildren">
-                    <div class="badge absolute top-2 left-2 size-4 bg-sky-500 rounded-full"
+                    <div class="badge absolute top-2 left-2 size-4 rounded-full"
                     :class="[child.sexe == 'male' ? 'bg-sky-500' : 'bg-pink-500']"></div>
                     
                     <div class="avatar self-center size-16 rounded-full border overflow-hidden">
