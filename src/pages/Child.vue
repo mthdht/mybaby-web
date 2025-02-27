@@ -14,9 +14,9 @@
     <!-- Tabs ou sections de contenu -->
     <section class="tabs flex gap-4 font-semibold">
       <button class="tab-btn border-2 border-sky-500 text-sky-500 py-2 px-4 rounded w-1/3 " 
-        :class="{ 'bg-sky-500 text-white': activeTab === 'journal' }" @click="activeTab = 'journal'"
+        :class="{ 'bg-sky-500 text-white': activeTab === 'activities' }" @click="activeTab = 'activities'"
       >
-        Journaux 
+        Activités 
       </button>
 
       <button class="tab-btn border-2 border-emerald-500 text-emerald-500 py-2 px-4 rounded w-1/3 " 
@@ -39,14 +39,14 @@
         leave-to-class="opacity-0 translate-y-2"
     >
 
-      <div v-if="activeTab === 'journal'">
+      <div v-if="activeTab === 'activities'">
         <!-- Liste des activités -->
         <div class="space-y-4">
           <Accordion label="Lundi 24 Février 2025" open class="bg-sky-100 activity-card p-4 rounded shadow ">
             <ul class="space-y-4">
               <li class="flex gap-2">
                 <span class="font-semibold w-12">14h15:</span>
-                <ArrowPathIcon class="size-5"> </ArrowPathIcon>
+                <ArrowPathIcon class="size-5 self-center -ml-1"> </ArrowPathIcon>
                 <p class="">
                   <span class="border-b-2 border-slate-500">Change</span>: <span class="italic">Selles</span> 
                 </p>
@@ -62,9 +62,9 @@
 
               <li class="flex gap-2">
                 <span class="font-semibold w-12">10h45:</span>
-                <MoonIcon class="size-5"> </MoonIcon>
+                <MoonIcon class="size-5 self-center"> </MoonIcon>
                 <p>
-                  <span class="border-b-2 border-slate-500">Sieste</span> 1h30
+                  <span class="border-b-2 border-slate-500">Sieste</span> <span class="italic">45 min</span>
                 </p>
               </li>
             </ul>
@@ -124,6 +124,6 @@ const child = {
   avatar: "https://placekitten.com/200/200"
 }
 
-const activeTab = ref('journal')
+const activeTab = ref('activities')
 </script>
   

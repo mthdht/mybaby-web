@@ -5,12 +5,12 @@
             <span><ChevronDownIcon class="size-6 stroke-2"></ChevronDownIcon></span>
         </p>
         <Transition
-            enter-active-class="transition duration-200 ease-in-out"
+            enter-active-class="transition-[grid-template-rows] duration-200 ease-in-out"
             leave-active-class="transition duration-200 ease-in-out"
-            enter-from-class="opacity-0 -translate-y-2"
-            leave-to-class="opacity-0 -translate-y-2"
+            enter-from-class="opacity-0 -translate-y-2 grid-rows-0"
+            leave-to-class="opacity-0 -translate-y-2 grid-rows-0"
         >
-            <div class="accordion-content"v-show="showContent">
+            <div class="accordion-content grid-rows-1"v-show="showContent">
                 <slot></slot>
             </div>
         </Transition>

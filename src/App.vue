@@ -14,12 +14,13 @@
     <header class="relative flex justify-between items-center bg-sky-500 py-4 px-8 text-white">
         <div class="brand font-semibold text-xl">My Baby</div>
         <nav class="flex gap-4 ">
-            <RouterLink to="/notifications">
-              <BellIcon class="size-6"></BellIcon>
+            <RouterLink to="/notifications" class="relative">
+              <div class="size-2 absolute top-0 right-px bg-pink-500 rounded-full z-0"></div>
+              <BellIcon class="size-6 stroke-2 z-50 relative"></BellIcon>
             </RouterLink>
 
             <RouterLink to="/notifications">
-              <UserIcon class="size-6"></UserIcon>
+              <UserIcon class="size-6 stroke-2"></UserIcon>
             </RouterLink>
         </nav>
     </header>
