@@ -32,32 +32,40 @@
       </section>
   
       <!-- Contenu de l'onglet sélectionné -->
-      <div v-show="activeTab === 'activities'">
-        <!-- Liste des activités -->
-        <div class="activity-card bg-sky-100 p-4 rounded-lg shadow">
-          <h4 class="font-semibold">Activités de la journée</h4>
-          <ul>
+      <Transition mode="out-in"
+          enter-active-class="transition duration-300 ease-out"
+          leave-active-class="transition duration-300 ease-in"
+          enter-from-class="opacity-0 -translate-y-1"
+          leave-to-class="opacity-0 translate-y-1"
+      >
+
+        <div v-if="activeTab === 'activities'">
+          <!-- Liste des activités -->
+          <div class="activity-card bg-sky-100 p-4 rounded shadow">
+            <h4 class="font-semibold">Activités de la journée</h4>
+            <ul>
             <li>Repas: <span>10h30 - Purée de légumes</span></li>
             <li>Coucher: <span>12h - Sieste de 2 heures</span></li>
           </ul>
         </div>
       </div>
-  
-      <div v-show="activeTab === 'journal'">
+      
+      <div v-else-if="activeTab === 'journal'">
         <!-- Journal quotidien -->
-        <div class="journal-card bg-emerald-100 p-4 rounded-lg shadow">
+        <div class="journal-card bg-emerald-100 p-4 rounded shadow">
           <h4 class="font-semibold">Journal de la journée</h4>
           <p>12h30 - Henry a bien mangé et est allé se coucher. Aucun problème de santé à signaler.</p>
         </div>
       </div>
-  
-      <div v-show="activeTab === 'alerts'">
+      
+      <div v-else-if="activeTab === 'alerts'">
         <!-- Alertes et messages -->
-        <div class="alert-card bg-yellow-50 p-4 rounded-lg shadow">
+        <div class="alert-card bg-yellow-50 p-4 rounded shadow">
           <p class="font-semibold text-red-600">Alerte</p>
           <p>Problème de couche à 11h - Changement nécessaire.</p>
         </div>
       </div>
+    </Transition>
     </div>
   </template>
   
