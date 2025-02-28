@@ -54,7 +54,7 @@ export const transmissions = [
     {
         date: '2025-02-24 1:25:37',
         type: 'sieste',
-        value: 72,
+        value: 56,
     },
     {
         date: '2025-01-24 1:25:37',
@@ -75,7 +75,7 @@ export const transmissions = [
     {
         date: '2025-02-24 1:25:37',
         type: 'sieste',
-        value: 72,
+        value: 186,
     },
     {
         date: '2025-02-25 14:25:37',
@@ -124,6 +124,12 @@ export function readableTime(date) {
     return time[0] + 'H' + time[1]
 }
 
-export function timeFromValue(value) {
-    return value / 60 > 0 ? (Math.floor(value / 60) + 'H' + value % 60) : value % 60
+export function timeFromValue(minutes) {
+    if (typeof minutes !== 'number' || minutes < 0) return 'Invalid input';
+    
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    console.log(minutes, hours, mins)
+
+    return hours == 0 ? mins + ' minutes' : `${hours}h${mins.toString().padStart(2, '0')}`;
 }
