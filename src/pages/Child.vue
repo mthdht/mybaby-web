@@ -42,54 +42,24 @@
       <div v-if="activeTab === 'activities'">
         <!-- Liste des activités -->
         <div class="space-y-4">
-          <Accordion label="Lundi 24 Février 2025" open class="bg-sky-100 activity-card p-4 rounded shadow ">
+          <Accordion 
+            open 
+            :label="readableDay(transmission[0])" 
+            class="bg-sky-100 activity-card p-4 rounded shadow "
+            v-for="transmission in transmissionByDate(transmissions)"
+          >
             <ul class="divide-y-2 divide-sky-200">
-              <li class="flex gap-2 py-4">
-                <span class="font-semibold w-12">14h15:</span>
-                <ArrowPathIcon class="size-5 self-center -ml-1"> </ArrowPathIcon>
+              <li class="flex gap-2 py-4" v-for="activity in transmission[1]">
+                <span class="font-semibold w-12">{{ readableTime(activity.date) }}:</span>
+                <component :is="getIconFromTransmission(activity)" class="size-5"></component>
                 <p class="">
-                  <span class="border-b-2 border-slate-500">Change</span>: <span class="italic">Selles</span> 
-                </p>
-              </li>
-
-              <li class="flex gap-2 py-4">
-                <span class="font-semibold w-12">12h15:</span>
-                <CakeIcon class="size-6"> </CakeIcon>
-                <p class="">
-                  <span class="border-b-2 border-slate-500">Repas</span>: <span class="italic">Pomme de terre, poissons, légumes</span> 
-                </p>
-              </li>
-
-              <li class="flex gap-2 py-4">
-                <span class="font-semibold w-12">10h45:</span>
-                <MoonIcon class="size-5 self-center"> </MoonIcon>
-                <p>
-                  <span class="border-b-2 border-slate-500">Sieste</span> <span class="italic">45 min</span>
+                  <span class="border-b-2 border-slate-500">{{  activity.type }}</span>: <span class="italic">{{ activity.type == 'sieste' ? timeFromValue(activity.value) : activity.value }}</span> 
                 </p>
               </li>
             </ul>
           </Accordion>
 
-          <Accordion label="Vendredi 21 Février 2025" class="bg-sky-100 activity-card p-4 rounded shadow ">
-            <ul>
-              <li>Repas: <span>10h30 - Purée de légumes</span></li>
-              <li>Coucher: <span>12h - Sieste de 2 heures</span></li>
-            </ul>
-          </Accordion>
-
-          <Accordion label="Jeudi 22 Février 2025" class="bg-sky-100 activity-card p-4 rounded shadow ">
-            <ul>
-              <li>Repas: <span>10h30 - Purée de légumes</span></li>
-              <li>Coucher: <span>12h - Sieste de 2 heures</span></li>
-            </ul>
-          </Accordion>
-
-          <Accordion label="Mercredi 23 Février 2025" class="bg-sky-100 activity-card p-4 rounded shadow ">
-            <ul>
-              <li>Repas: <span>10h30 - Purée de légumes</span></li>
-              <li>Coucher: <span>12h - Sieste de 2 heures</span></li>
-            </ul>
-          </Accordion>
+          
         </div>
       </div>
       
@@ -116,6 +86,8 @@
 import { ref } from 'vue'
 import Accordion from '../components/Accordion.vue';
 import { ArrowPathIcon, CakeIcon, MoonIcon } from '@heroicons/vue/24/outline';
+import { timeFromValue, transmissions, readableTime, transmissionByDate } from '../utils/data.js'
+import { readableDay } from '../utils/data';
 
 const child = {
   name: "Henry Dubois",
@@ -125,5 +97,21 @@ const child = {
 }
 
 const activeTab = ref('activities')
+
+const getIconFromTransmission = (transmission) => {
+  switch (transmission.type) {
+    case 'sieste':
+      return MoonIcon
+      break;
+    case 'repas':
+      return CakeIcon
+      break;
+    case 'hygiene':
+      return ArrowPathIcon
+      break
+  }
+}
+
+console.log(transmissionByDate(transmissions))
 </script>
   

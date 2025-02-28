@@ -54,64 +54,13 @@ import { computed, reactive } from 'vue'
 import Select from '../components/Select.vue'
 import { UserPlusIcon, UserIcon, ExclamationCircleIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline';
 import { RouterLink } from 'vue-router';
+import { children } from '../utils/data.js'
 
 const filters = reactive({
     creche: "creche 1",
     sort: "",
     search: ""
 })
-
-const children = [
-    {
-        name: "Henry",
-        creche: "creche 1",
-        age: "6 mois",
-        sexe: 'male'
-    },
-    {
-        name: "Stephanie",
-        creche: "creche 1",
-        age: "6 mois",
-        sexe: 'female'
-    },
-    {
-        name: "Lucie",
-        creche: "creche 2",
-        age: "6 mois",
-        sexe: 'female'
-    },
-    {
-        name: "Stephanie",
-        creche: "creche 2",
-        age: "6 mois",
-        sexe: 'female'
-    },
-    {
-        name: "Oscar",
-        creche: "creche 1",
-        age: "6 mois",
-        sexe: 'male'
-    },
-    {
-        name: "Arthur",
-        creche: "creche 2",
-        age: "6 mois",
-        sexe: 'male'
-    },
-    {
-        name: "Quentin",
-        creche: "creche 2",
-        age: "6 mois",
-        sexe: 'male'
-    },
-    {
-        name: "Anne",
-        creche: "creche 2",
-        age: "6 mois",
-        sexe: 'female'
-    },
-
-]
 
 const filteredChildren = computed(() => {
     return children
