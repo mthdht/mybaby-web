@@ -27,7 +27,7 @@
       <button class="tab-btn border-2 border-yellow-500 py-2 px-4 rounded w-1/3 " 
         :class="{ 'bg-yellow-500 text-white': activeTab === 'informations', 'text-yellow-500': activeTab !== 'informations' }" @click="activeTab = 'informations'"
       >
-        Informations
+        Infos
       </button>
     </section>
 
@@ -43,8 +43,8 @@
         <!-- Liste des activités -->
         <div class="space-y-4">
           <Accordion label="Lundi 24 Février 2025" open class="bg-sky-100 activity-card p-4 rounded shadow ">
-            <ul class="space-y-4">
-              <li class="flex gap-2">
+            <ul class="divide-y-2 divide-sky-200">
+              <li class="flex gap-2 py-4">
                 <span class="font-semibold w-12">14h15:</span>
                 <ArrowPathIcon class="size-5 self-center -ml-1"> </ArrowPathIcon>
                 <p class="">
@@ -52,7 +52,7 @@
                 </p>
               </li>
 
-              <li class="flex gap-2">
+              <li class="flex gap-2 py-4">
                 <span class="font-semibold w-12">12h15:</span>
                 <CakeIcon class="size-6"> </CakeIcon>
                 <p class="">
@@ -60,7 +60,7 @@
                 </p>
               </li>
 
-              <li class="flex gap-2">
+              <li class="flex gap-2 py-4">
                 <span class="font-semibold w-12">10h45:</span>
                 <MoonIcon class="size-5 self-center"> </MoonIcon>
                 <p>
