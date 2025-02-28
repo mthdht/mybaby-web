@@ -42,16 +42,16 @@
       <div v-if="activeTab === 'activities'">
         <!-- Liste des activités -->
         <div class="space-y-4">
-          <Accordion 
-            open 
+          <Accordion
             :label="readableDay(transmission[0])" 
             class="bg-sky-100 activity-card p-4 rounded shadow "
-            v-for="transmission in transmissionByDate(transmissions)"
+            v-for="(transmission,index)  in transmissionByDate(transmissions)"
+            :open="index == 0"
           >
             <ul class="divide-y-2 divide-sky-200">
               <li class="flex gap-2 py-4" v-for="activity in transmission[1]">
                 <span class="font-semibold w-12">{{ readableTime(activity.date) }}:</span>
-                <component :is="getIconFromTransmission(activity)" class="size-5"></component>
+                <component :is="getIconFromTransmission(activity)" class="size-5 mt-[3px]"></component>
                 <p class="">
                   <span class="border-b-2 border-slate-500">{{  activity.type }}</span>: <span class="italic">{{ activity.type == 'sieste' ? timeFromValue(activity.value) : activity.value }}</span> 
                 </p>

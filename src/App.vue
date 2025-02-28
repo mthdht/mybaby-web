@@ -11,7 +11,7 @@
       </div>
     </header>
 
-    <header class="relative flex justify-between items-center bg-sky-500 py-4 px-8 text-white">
+    <header class="relative flex justify-between items-center bg-sky-500 py-4 px-8 text-white shadow">
         <div class="brand font-semibold text-xl">My Baby</div>
         <nav class="flex gap-4 ">
             <RouterLink to="/notifications" class="relative">
