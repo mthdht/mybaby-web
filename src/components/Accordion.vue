@@ -1,6 +1,6 @@
 <template>
-    <div class="accordion space-y-6">
-        <p class="font-semibold flex justify-between items-center cursor-pointer" @click="showContent = !showContent">
+    <div class="accordion">
+        <p class="font-semibold flex justify-between items-center cursor-pointer py-4" @click="showContent = !showContent">
             <span>{{ props.label }}</span>
             <span><ChevronDownIcon class="size-6 stroke-2"></ChevronDownIcon></span>
         </p>

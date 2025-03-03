@@ -44,7 +44,7 @@
         <div class="space-y-4">
           <Accordion
             :label="readableDay(transmission[0])" 
-            class="bg-sky-100 activity-card p-4 rounded shadow "
+            class="bg-sky-100 activity-card px-4 rounded shadow "
             v-for="(transmission,index)  in transmissionByDate(transmissions)"
             :open="index == 0"
           >
