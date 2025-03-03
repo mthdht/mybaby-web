@@ -112,7 +112,7 @@ export function transmissionByDate(transmissions) {
 export function getResumeOfTheDay(transmission) {
     return transmission.filter((activity) => {
         return activity.type == 'resume'
-    })
+    })[0]?.value
 }
 
 export function sqlToJsDate(date) {

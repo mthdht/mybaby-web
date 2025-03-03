@@ -59,9 +59,9 @@
                 </template>
               </li>
 
-              <li class="p-4 border journal-card p-4 rounded shadow">
-                <h4 class="font-semibold">Journal de la journée</h4>
-                <p> {{ getResumeOfTheDay(transmission) }}</p>
+              <li class="p-4 border journal-card p-4 rounded shadow" v-if="getResumeOfTheDay(transmission[1])">
+                <h4 class="font-semibold mb-4">Journal de la journée</h4>
+                <p> {{ getResumeOfTheDay(transmission[1]) }}</p>
               </li>
             </ul>
           </Accordion>
