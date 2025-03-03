@@ -44,17 +44,24 @@
         <div class="space-y-4">
           <Accordion
             :label="readableDay(transmission[0])" 
-            class="bg-sky-100 activity-card px-4 rounded shadow "
+            class="bg-sky-100 activity-card rounded shadow p-4"
             v-for="(transmission,index)  in transmissionByDate(transmissions)"
             :open="index == 0"
           >
             <ul class="divide-y-2 divide-sky-200">
-              <li class="flex gap-2 py-4" v-for="activity in transmission[1]">
-                <span class="font-semibold w-12">{{ readableTime(activity.date) }}:</span>
-                <component :is="getIconFromTransmission(activity)" class="size-5 mt-[3px]"></component>
-                <p class="">
-                  <span class="border-b-2 border-slate-500">{{  activity.type }}</span>: <span class="italic">{{ activity.type == 'sieste' ? timeFromValue(activity.value) : activity.value }}</span> 
-                </p>
+              <li class="flex gap-2 p-4" v-for="activity in transmission[1]">
+                <template v-if="activity.type != 'resume'">
+                  <span class="font-semibold w-12">{{ readableTime(activity.date) }}:</span>
+                  <component :is="getIconFromTransmission(activity)" class="size-5 mt-[3px]"></component>
+                  <p class="">
+                    <span class="border-b-2 border-slate-500">{{  activity.type }}</span>: <span class="italic">{{ activity.type == 'sieste' ? timeFromValue(activity.value) : activity.value }}</span> 
+                  </p>
+                </template>
+              </li>
+
+              <li class="p-4 border journal-card p-4 rounded shadow">
+                <h4 class="font-semibold">Journal de la journée</h4>
+                <p> {{ getResumeOfTheDay(transmission) }}</p>
               </li>
             </ul>
           </Accordion>
@@ -83,10 +90,10 @@
 </template>
   
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import Accordion from '../components/Accordion.vue';
 import { ArrowPathIcon, CakeIcon, MoonIcon } from '@heroicons/vue/24/outline';
-import { timeFromValue, transmissions, readableTime, transmissionByDate } from '../utils/data.js'
+import { timeFromValue, transmissions, readableTime, transmissionByDate, getResumeOfTheDay } from '../utils/data.js'
 import { readableDay } from '../utils/data';
 
 const child = {
@@ -97,6 +104,7 @@ const child = {
 }
 
 const activeTab = ref('activities')
+
 
 const getIconFromTransmission = (transmission) => {
   switch (transmission.type) {

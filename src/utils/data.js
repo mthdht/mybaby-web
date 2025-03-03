@@ -52,6 +52,11 @@ export const children = [
 
 export const transmissions = [
     {
+        date: '2025-03-24 1:25:37',
+        type: 'resume',
+        value: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus corrupti minus commodi tempora quo ab. Non dignissimos corporis facilis tempora.',
+    },
+    {
         date: '2025-02-24 1:25:37',
         type: 'sieste',
         value: 56,
@@ -78,7 +83,7 @@ export const transmissions = [
         value: 186,
     },
     {
-        date: '2025-02-25 14:25:37',
+        date: '2025-02-24 14:25:37',
         type: 'repas',
         value: 'Salade de pomme de terre, poisson',
     },
@@ -104,12 +109,23 @@ export function transmissionByDate(transmissions) {
     return Object.entries(Object.groupBy(transmissions, ({date}) => date.split(' ')[0])).sort().reverse()
 }
 
+export function getResumeOfTheDay(transmission) {
+    return transmission.filter((activity) => {
+        return activity.type == 'resume'
+    })
+}
+
 export function sqlToJsDate(date) {
-    const time = date.split(/[- :]/)
-    return new Date(...time)
+    return new Date(date)
 }
 
 export function readableDay(date) {
+    console.log(sqlToJsDate(date).toLocaleDateString('fr-FR', {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    }))
     return sqlToJsDate(date).toLocaleDateString('fr-FR', {
         weekday: "long",
         year: "numeric",
