@@ -41,6 +41,15 @@
 
       <div v-if="activeTab === 'activities'">
         <!-- Liste des activités -->
+        <h4 class="mb-4 text-xl font-semibold flex justify-between items-center">
+          <span>
+            Tout les journaux quotidien    
+          </span>
+          <button class="bg-emerald-500 text-white rounded gap-2 p-2">
+            <PlusCircleIcon class="size-6 stoke-2"></PlusCircleIcon>
+          </button>
+        </h4>
+
         <div class="space-y-4">
           <Accordion
             :label="readableDay(transmission[0])" 
@@ -90,9 +99,9 @@
 </template>
   
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import Accordion from '../components/Accordion.vue';
-import { ArrowPathIcon, CakeIcon, MoonIcon } from '@heroicons/vue/24/outline';
+import { ArrowPathIcon, CakeIcon, MoonIcon, NewspaperIcon, PlusCircleIcon } from '@heroicons/vue/24/outline';
 import { timeFromValue, transmissions, readableTime, transmissionByDate, getResumeOfTheDay } from '../utils/data.js'
 import { readableDay } from '../utils/data';
 
