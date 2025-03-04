@@ -42,7 +42,8 @@
       <div v-if="activeTab === 'activities'">
         <!-- Liste des activités -->
         <h4 class="mb-4 text-xl font-semibold flex justify-between items-center">
-          <span>
+          <span class="flex gap-2 items-center">
+            <NewspaperIcon class="size-6"></NewsPaperIcon>
             Tout les journaux quotidien    
           </span>
           <button class="bg-emerald-500 text-white rounded gap-2 p-2">
@@ -53,22 +54,22 @@
         <div class="space-y-4">
           <Accordion
             :label="readableDay(transmission[0])" 
-            class="bg-sky-100 activity-card rounded shadow p-4"
+            class="bg-sky-100 activity-card rounded shadow"
             v-for="(transmission,index)  in transmissionByDate(transmissions)"
             :open="index == 0"
           >
-            <ul class="divide-y-2 divide-sky-200">
-              <li class="flex gap-2 p-4" v-for="activity in transmission[1]">
-                <template v-if="activity.type != 'resume'">
+            <ul class="space-y-2">
+              <template  v-for="activity in transmission[1]">
+                <li class="flex gap-2 p-4 bg-sky-50 shadow  rounded" v-if="activity.type != 'resume'">
                   <span class="font-semibold w-12">{{ readableTime(activity.date) }}:</span>
                   <component :is="getIconFromTransmission(activity)" class="size-5 mt-[3px]"></component>
                   <p class="">
                     <span class="border-b-2 border-slate-500">{{  activity.type }}</span>: <span class="italic">{{ activity.type == 'sieste' ? timeFromValue(activity.value) : activity.value }}</span> 
                   </p>
-                </template>
-              </li>
+                </li>
+              </template>
 
-              <li class="p-4 border journal-card p-4 rounded shadow" v-if="getResumeOfTheDay(transmission[1])">
+              <li class="p-4 mt-4 border journal-card rounded shadow bg-sky-50" v-if="getResumeOfTheDay(transmission[1])">
                 <h4 class="font-semibold mb-4">Journal de la journée</h4>
                 <p> {{ getResumeOfTheDay(transmission[1]) }}</p>
               </li>
