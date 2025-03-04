@@ -80,13 +80,36 @@
         </div>
       </div>
       
-      <div v-else-if="activeTab === 'messages'">
-        <!-- Journal quotidien -->
-        <div class="messages-card bg-emerald-100 p-4 rounded shadow">
-          <h4 class="font-semibold">Lorem ipsum dolor sit amet.</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt cumque ratione optio culpa voluptas voluptate accusamus fuga, unde, sed laborum nobis harum?</p>
+      <div v-else-if="activeTab === 'messages'" class="space-y-4">
+        <h4 class="text-xl font-semibold flex items-center gap-2">
+          <ChatBubbleBottomCenterTextIcon class="size-6"></ChatBubbleBottomCenterTextIcon>
+          Messages reçus
+        </h4>
+
+        <div v-if="messages.length > 0" class="space-y-4">
+          <div 
+            v-for="message in sortedMessages" 
+            :key="message.id"
+            class="p-4 border-l-4 rounded shadow bg-white"
+            :class="messageSeverityClass(message.severity)"
+          >
+            <div class="flex justify-between items-center">
+              <h5 class="font-semibold">{{ message.object }}</h5>
+              <span class="text-sm text-gray-500">{{ new Date(message.created_at).toLocaleDateString() }}</span>
+            </div>
+
+            <p class="text-gray-700 mt-2 whitespace-pre-line">{{ message.message }}</p>
+
+            <span class="inline-block mt-2 text-xs font-semibold px-2 py-1 rounded-full" 
+              :class="messageTypeClass(message.target)">
+              {{ messageTargetLabel(message.target) }}
+            </span>
+          </div>
         </div>
+
+        <p v-else class="text-gray-500 italic">Aucun message reçu pour l’instant.</p>
       </div>
+
       
       <div v-else-if="activeTab === 'informations'">
         <!-- Alertes et messages -->
@@ -99,11 +122,10 @@
 </template>
   
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import Accordion from '../components/Accordion.vue';
-import { ArrowPathIcon, CakeIcon, MoonIcon, NewspaperIcon, PlusCircleIcon } from '@heroicons/vue/24/outline';
-import { timeFromValue, transmissions, readableTime, transmissionByDate, getResumeOfTheDay } from '../utils/data.js'
-import { readableDay } from '../utils/data';
+import { ArrowPathIcon, CakeIcon, ChatBubbleBottomCenterTextIcon, MoonIcon, NewspaperIcon, PlusCircleIcon } from '@heroicons/vue/24/outline';
+import { timeFromValue, transmissions, readableTime, transmissionByDate, getResumeOfTheDay, readableDay, messages } from '../utils/data.js'
 
 const child = {
   name: "Henry Dubois",
@@ -126,5 +148,38 @@ const getIconFromTransmission = (transmission) => {
   return iconMap[transmission.type] || null;
   
 }
+
+const sortedMessages = computed(() => {
+  return [...messages].sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+})
+
+// Classe pour la bordure en fonction de la gravité du message
+const messageSeverityClass = (severity) => {
+  return {
+    'border-red-500 bg-red-50': severity === 'danger',
+    'border-yellow-500 bg-yellow-50': severity === 'warning',
+    'border-sky-500 bg-sky-50': severity === 'info',
+    'border-gray-500 bg-gray-50': severity === 'default'
+  }
+}
+
+// Classe pour le badge en fonction du type de message
+const messageTypeClass = (target) => {
+  return {
+    'bg-red-500 text-white': target === 'all',
+    'bg-sky-500 text-white': target === 'creche',
+    'bg-emerald-500 text-white': target === 'child'
+  }
+}
+
+// Texte du badge en fonction du type de message
+const messageTargetLabel = (target) => {
+  return {
+    'all': 'Message général',
+    'creche': 'Message de la crèche',
+    'child': 'Message personnel'
+  }[target] || 'Inconnu'
+}
+
 </script>
   

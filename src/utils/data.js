@@ -106,19 +106,134 @@ export const transmissions = [
 ]
 
 export const messages = [
+    // 🔴 Message général (1)
     {
-        target: 'all',
-        severity: 'danger',
-        object: 'Maladie à la crèche',
-        message: 'Bonjour à tous, \nen ce moment il y a la varicelle qui circule à la crèche.\nCordialement,\nCaroline'
+      id: 1,
+      target: 'all',
+      severity: 'danger',
+      object: 'Épidémie de grippe',
+      message: 'Bonjour à tous,\nUne épidémie de grippe touche actuellement plusieurs enfants de la crèche. Merci de surveiller les symptômes.\nCordialement,\nL’équipe de la crèche',
+      created_at: '2025-03-05 09:00:00'
+    },
+  
+    // 🏫 Messages pour la crèche entière (3)
+    {
+      id: 2,
+      target: 'creche',
+      severity: 'info',
+      object: 'Photo de groupe',
+      message: 'Chers parents,\nUne photo de groupe sera prise vendredi matin. Merci d’habiller vos enfants avec des vêtements colorés !',
+      created_at: '2025-03-02 10:15:00'
     },
     {
-        target: '',
-        severity: 'danger',
-        object: 'Maladie à la crèche',
-        message: 'Bonjour à tous, \nen ce moment il y a la varicelle qui circule à la crèche.\nCordialement,\nCaroline'
+      id: 3,
+      target: 'creche',
+      severity: 'warning',
+      object: 'Fermeture exceptionnelle',
+      message: 'La crèche sera exceptionnellement fermée lundi prochain en raison d’une intervention technique.',
+      created_at: '2025-03-08 08:30:00'
+    },
+    {
+      id: 4,
+      target: 'creche',
+      severity: 'info',
+      object: 'Carnaval de la crèche',
+      message: 'Nous organisons un carnaval jeudi prochain ! Déguisements bienvenus pour les enfants !',
+      created_at: '2025-03-10 14:00:00'
+    },
+  
+    // 👦 Messages destinés uniquement à Oscar (11)
+    {
+      id: 5,
+      target: 'child',
+      severity: 'info',
+      object: 'Bonne journée',
+      message: 'Oscar a passé une excellente journée aujourd’hui ! Il a bien joué avec ses camarades.',
+      created_at: '2025-03-01 16:00:00'
+    },
+    {
+      id: 6,
+      target: 'child',
+      severity: 'warning',
+      object: 'Sieste écourtée',
+      message: 'Oscar a eu une sieste plus courte que d’habitude aujourd’hui. Il semblait un peu agité.',
+      created_at: '2025-03-07 14:15:00'
+    },
+    {
+      id: 7,
+      target: 'child',
+      severity: 'info',
+      object: 'Activité peinture',
+      message: 'Oscar a adoré l’activité peinture ce matin ! Il a fait un très beau dessin.',
+      created_at: '2025-03-03 11:45:00'
+    },
+    {
+      id: 8,
+      target: 'child',
+      severity: 'danger',
+      object: 'Petite chute',
+      message: 'Oscar a fait une petite chute en jouant dehors, mais rien de grave ! Il a un petit bleu sur le genou.',
+      created_at: '2025-03-09 15:20:00'
+    },
+    {
+      id: 9,
+      target: 'child',
+      severity: 'info',
+      object: 'Goûter',
+      message: 'Oscar a bien mangé son goûter aujourd’hui, il a particulièrement aimé les fruits !',
+      created_at: '2025-03-06 16:10:00'
+    },
+    {
+      id: 10,
+      target: 'child',
+      severity: 'warning',
+      object: 'Difficulté à s’endormir',
+      message: 'Oscar a eu un peu de mal à s’endormir pour la sieste, il était très excité après l’activité du matin.',
+      created_at: '2025-03-04 13:30:00'
+    },
+    {
+      id: 11,
+      target: 'child',
+      severity: 'info',
+      object: 'Partage avec les autres',
+      message: 'Oscar a bien partagé ses jouets aujourd’hui avec ses amis ! Un super progrès.',
+      created_at: '2025-03-11 15:50:00'
+    },
+    {
+      id: 12,
+      target: 'child',
+      severity: 'danger',
+      object: 'Fièvre en fin de journée',
+      message: 'Oscar avait un peu de fièvre en fin de journée. Nous vous recommandons de surveiller son état ce soir.',
+      created_at: '2025-03-05 17:00:00'
+    },
+    {
+      id: 13,
+      target: 'child',
+      severity: 'info',
+      object: 'Nouvelle comptine',
+      message: 'Oscar a appris une nouvelle comptine aujourd’hui, il l’a chantée plusieurs fois avec enthousiasme !',
+      created_at: '2025-03-08 10:00:00'
+    },
+    {
+      id: 14,
+      target: 'child',
+      severity: 'info',
+      object: 'Motricité fine',
+      message: 'Oscar a bien progressé sur la motricité fine aujourd’hui avec les perles et les puzzles !',
+      created_at: '2025-03-02 14:40:00'
+    },
+    {
+      id: 15,
+      target: 'child',
+      severity: 'warning',
+      object: 'Fatigue en fin de journée',
+      message: 'Oscar semblait un peu fatigué aujourd’hui en fin de journée. Peut-être une bonne nuit de sommeil l’aidera !',
+      created_at: '2025-03-10 16:20:00'
     }
-]
+  ]
+  
+
 
 export function transmissionByDate(transmissions) {
     return Object.entries(
@@ -163,7 +278,6 @@ export function timeFromValue(minutes) {
     
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
-    console.log(minutes, hours, mins)
 
     return hours == 0 ? mins + ' minutes' : `${hours}h${mins.toString().padStart(2, '0')}`;
 }
