@@ -116,19 +116,15 @@ const activeTab = ref('activities')
 
 
 const getIconFromTransmission = (transmission) => {
-  switch (transmission.type) {
-    case 'sieste':
-      return MoonIcon
-      break;
-    case 'repas':
-      return CakeIcon
-      break;
-    case 'hygiene':
-      return ArrowPathIcon
-      break
-  }
-}
 
-console.log(transmissionByDate(transmissions))
+  const iconMap = {
+    sieste: MoonIcon,
+    repas: CakeIcon,
+    hygiene: ArrowPathIcon,
+  };
+
+  return iconMap[transmission.type] || null;
+  
+}
 </script>
   
