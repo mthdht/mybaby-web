@@ -105,8 +105,32 @@ export const transmissions = [
 
 ]
 
+export const messages = [
+    {
+        target: 'all',
+        severity: 'danger',
+        object: 'Maladie à la crèche',
+        message: 'Bonjour à tous, \nen ce moment il y a la varicelle qui circule à la crèche.\nCordialement,\nCaroline'
+    },
+    {
+        target: '',
+        severity: 'danger',
+        object: 'Maladie à la crèche',
+        message: 'Bonjour à tous, \nen ce moment il y a la varicelle qui circule à la crèche.\nCordialement,\nCaroline'
+    }
+]
+
 export function transmissionByDate(transmissions) {
-    return Object.entries(Object.groupBy(transmissions, ({date}) => date.split(' ')[0])).sort().reverse()
+    return Object.entries(
+        transmissions.reduce((acc, transmission) => {
+            const dateKey = transmission.date.split(' ')[0];
+            acc[dateKey] = acc[dateKey] || [];
+            acc[dateKey].push(transmission);
+            return acc;
+        }, {})
+    ).sort().reverse();
+    // wait for browsers to accept groupBy
+    //return Object.entries(Object.groupBy(transmissions, ({date}) => date.split(' ')[0])).sort().reverse()
 }
 
 export function getResumeOfTheDay(transmission) {
@@ -120,12 +144,6 @@ export function sqlToJsDate(date) {
 }
 
 export function readableDay(date) {
-    console.log(sqlToJsDate(date).toLocaleDateString('fr-FR', {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-    }))
     return sqlToJsDate(date).toLocaleDateString('fr-FR', {
         weekday: "long",
         year: "numeric",

@@ -82,17 +82,16 @@
       
       <div v-else-if="activeTab === 'messages'">
         <!-- Journal quotidien -->
-        <div class="journal-card bg-emerald-100 p-4 rounded shadow">
-          <h4 class="font-semibold">Journal de la journée</h4>
-          <p>12h30 - Henry a bien mangé et est allé se coucher. Aucun problème de santé à signaler.</p>
+        <div class="messages-card bg-emerald-100 p-4 rounded shadow">
+          <h4 class="font-semibold">Lorem ipsum dolor sit amet.</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt cumque ratione optio culpa voluptas voluptate accusamus fuga, unde, sed laborum nobis harum?</p>
         </div>
       </div>
       
       <div v-else-if="activeTab === 'informations'">
         <!-- Alertes et messages -->
         <div class="alert-card bg-yellow-50 p-4 rounded shadow">
-          <p class="font-semibold text-red-600">Alerte</p>
-          <p>Problème de couche à 11h - Changement nécessaire.</p>
+          
         </div>
       </div>
     </Transition>
