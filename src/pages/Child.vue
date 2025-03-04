@@ -98,9 +98,14 @@
           </button>
         </h4>
 
+        <section class="filters grid grid-cols-2 gap-2">
+            <Select v-model="filters.severity" :options="[{label: 'Info', value: 'info'}, {label: 'Danger', value: 'danger'}]" placeholder="Type" class=""></Select>
+            <Select v-model="filters.target" :options="[{label: 'Tous', value: 'all'}, {label: 'Creche', value: 'creche'}]" placeholder="Destinataire" class=""></Select>
+        </section>
+
         <div v-if="messages.length > 0" class="space-y-4">
           <div 
-            v-for="message in sortedMessages" 
+            v-for="message in filteredMessages" 
             :key="message.id"
             class="p-4 border-l-4 rounded shadow"
             :class="messageSeverityClass(message.severity)"
@@ -134,10 +139,11 @@
 </template>
   
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, reactive } from 'vue'
 import Accordion from '../components/Accordion.vue';
 import { ArrowPathIcon, CakeIcon, ChatBubbleBottomCenterTextIcon, MoonIcon, NewspaperIcon, PlusCircleIcon } from '@heroicons/vue/24/outline';
 import { timeFromValue, transmissions, readableTime, transmissionByDate, getResumeOfTheDay, readableDay, messages } from '../utils/data.js'
+import Select from '../components/Select.vue'
 
 const child = {
   name: "Henry Dubois",
@@ -147,16 +153,28 @@ const child = {
 }
 
 const activeTab = ref('activities')
-const scrolled = ref(false)
 const headerShadow = ref()
 const intercept = ref()
 
+const filters = reactive({
+    severity: "",
+    target: "",
+})
+
+const filteredMessages = computed(() => {
+    return messages
+        .filter(message => filters.severity ? message.severity == filters.severity : true)
+        .filter(message => filters.target ? message.target == filters.target : true)
+        .slice()
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+})
+
 onMounted(() => {
   const observer = new IntersectionObserver(([entry]) => {
-  headerShadow.value.classList.toggle("shadow", !entry.isIntersecting);
-});
+    headerShadow.value.classList.toggle("shadow", !entry.isIntersecting);
+  });
 
-observer.observe(intercept.value);
+  observer.observe(intercept.value);
 })
 
 const getIconFromTransmission = (transmission) => {
