@@ -1,35 +1,41 @@
 <template>
-  <div class="p-4 space-y-6">
-    <!-- En-tête avec les informations de base -->
-    <header class="flex gap-4 items-center">
-      <div class="avatar w-24 h-24 rounded-full overflow-hidden border-2" :class="[child.sexe == 'male' ? 'border-sky-500' : 'border-pink-500']">
-        <img :src="child.avatar || 'default-avatar.png'" alt="avatar de l'enfant" class="object-cover w-full h-full">
-      </div>
-      <div class="info">
-        <h3 class="font-semibold text-2xl">{{ child.name }}</h3>
-        <p class="text-slate-500">{{ child.age }} | <span :class="{ 'text-sky-500': child.sexe === 'male', 'text-pink-500': child.sexe === 'female' }">{{ child.sexe == 'male' ? 'Garçon': 'Fille' }}</span></p>
-      </div>
-    </header>
+  <div class=" space-y-">
+    <div data-observer-intercept ref="intercept"></div>
 
-    <!-- Tabs ou sections de contenu -->
-    <section class="tabs flex gap-4 font-semibold">
-      <button class="tab-btn border-2 border-sky-500 text-sky-500 py-2 px-4 rounded w-1/3 " 
-        :class="{ 'bg-sky-500 text-white': activeTab === 'activities' }" @click="activeTab = 'activities'"
-      >
-        Activités 
-      </button>
+    <div class="space-y-6 sticky top-0 z-50 bg-slate-50 p-4" ref="headerShadow">
 
-      <button class="tab-btn border-2 border-emerald-500 text-emerald-500 py-2 px-4 rounded w-1/3 " 
-        :class="{ 'bg-emerald-500 text-white': activeTab === 'messages' }" @click="activeTab = 'messages'"
-      >
-        Messages
-      </button>
-      <button class="tab-btn border-2 border-yellow-500 py-2 px-4 rounded w-1/3 " 
-        :class="{ 'bg-yellow-500 text-white': activeTab === 'informations', 'text-yellow-500': activeTab !== 'informations' }" @click="activeTab = 'informations'"
-      >
-        Infos
-      </button>
-    </section>
+      <!-- En-tête avec les informations de base -->
+      <header class="flex gap-4 items-center">
+          <div class="avatar w-24 h-24 rounded-full overflow-hidden border-2" :class="[child.sexe == 'male' ? 'border-sky-500' : 'border-pink-500']">
+          <img :src="child.avatar || 'default-avatar.png'" alt="avatar de l'enfant" class="object-cover w-full h-full">
+        </div>
+        <div class="info">
+          <h3 class="font-semibold text-2xl">{{ child.name }}</h3>
+          <p class="text-slate-500">{{ child.age }} | <span :class="{ 'text-sky-500': child.sexe === 'male', 'text-pink-500': child.sexe === 'female' }">{{ child.sexe == 'male' ? 'Garçon': 'Fille' }}</span></p>
+        </div>
+      </header>
+
+
+      <!-- Tabs ou sections de contenu -->
+      <section class="tabs flex gap-4 font-semibold">
+        <button class="tab-btn border-2 border-sky-500 text-sky-500 py-2 px-4 rounded w-1/3 " 
+          :class="{ 'bg-sky-500 text-white': activeTab === 'activities' }" @click="activeTab = 'activities'"
+        >
+          Activités 
+        </button>
+
+        <button class="tab-btn border-2 border-emerald-500 text-emerald-500 py-2 px-4 rounded w-1/3 " 
+          :class="{ 'bg-emerald-500 text-white': activeTab === 'messages' }" @click="activeTab = 'messages'"
+        >
+          Messages
+        </button>
+        <button class="tab-btn border-2 border-yellow-500 py-2 px-4 rounded w-1/3 " 
+          :class="{ 'bg-yellow-500 text-white': activeTab === 'informations', 'text-yellow-500': activeTab !== 'informations' }" @click="activeTab = 'informations'"
+          >
+          Infos
+        </button>
+      </section>
+    </div>
 
     <!-- Contenu de l'onglet sélectionné -->
     <Transition mode="out-in"
@@ -39,7 +45,7 @@
         leave-to-class="opacity-0 translate-y-2"
     >
 
-      <div v-if="activeTab === 'activities'">
+      <div v-if="activeTab === 'activities'" class="p-4">
         <!-- Liste des activités -->
         <h4 class="mb-4 text-xl font-semibold flex justify-between items-center">
           <span class="flex gap-2 items-center">
@@ -80,17 +86,23 @@
         </div>
       </div>
       
-      <div v-else-if="activeTab === 'messages'" class="space-y-4">
-        <h4 class="text-xl font-semibold flex items-center gap-2">
-          <ChatBubbleBottomCenterTextIcon class="size-6"></ChatBubbleBottomCenterTextIcon>
-          Messages reçus
+      <div v-else-if="activeTab === 'messages'" class="space-y-4 p-4">
+        <h4 class="text-xl font-semibold flex items-center justify-between">
+          <span class="flex gap-2 items-center">
+            <ChatBubbleBottomCenterTextIcon class="size-6"></ChatBubbleBottomCenterTextIcon>
+            Messages reçus
+          </span>
+
+          <button class="bg-emerald-500 text-white rounded gap-2 p-2">
+            <PlusCircleIcon class="size-6 stoke-2"></PlusCircleIcon>
+          </button>
         </h4>
 
         <div v-if="messages.length > 0" class="space-y-4">
           <div 
             v-for="message in sortedMessages" 
             :key="message.id"
-            class="p-4 border-l-4 rounded shadow bg-white"
+            class="p-4 border-l-4 rounded shadow"
             :class="messageSeverityClass(message.severity)"
           >
             <div class="flex justify-between items-center">
@@ -111,7 +123,7 @@
       </div>
 
       
-      <div v-else-if="activeTab === 'informations'">
+      <div v-else-if="activeTab === 'informations'" class="p-4">
         <!-- Alertes et messages -->
         <div class="alert-card bg-yellow-50 p-4 rounded shadow">
           
@@ -122,7 +134,7 @@
 </template>
   
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import Accordion from '../components/Accordion.vue';
 import { ArrowPathIcon, CakeIcon, ChatBubbleBottomCenterTextIcon, MoonIcon, NewspaperIcon, PlusCircleIcon } from '@heroicons/vue/24/outline';
 import { timeFromValue, transmissions, readableTime, transmissionByDate, getResumeOfTheDay, readableDay, messages } from '../utils/data.js'
@@ -135,17 +147,25 @@ const child = {
 }
 
 const activeTab = ref('activities')
+const scrolled = ref(false)
+const headerShadow = ref()
+const intercept = ref()
 
+onMounted(() => {
+  const observer = new IntersectionObserver(([entry]) => {
+  headerShadow.value.classList.toggle("shadow", !entry.isIntersecting);
+});
+
+observer.observe(intercept.value);
+})
 
 const getIconFromTransmission = (transmission) => {
 
-  const iconMap = {
+  return  {
     sieste: MoonIcon,
     repas: CakeIcon,
     hygiene: ArrowPathIcon,
-  };
-
-  return iconMap[transmission.type] || null;
+  }[transmission.type] || null;
   
 }
 
