@@ -129,8 +129,53 @@
 
       
       <div v-else-if="activeTab === 'informations'" class="p-4">
-        <!-- Alertes et messages -->
-        <div class="alert-card bg-yellow-50 p-4 rounded shadow">
+        <!-- Informations -->
+        <h4 class="mb-4 text-xl font-semibold flex justify-between items-center">
+          <span class="flex gap-2 items-center">
+            <InformationCircleIcon class="size-6"></InformationCircleIcon>
+            Informations sur {{ child.first_name }}    
+          </span>
+          <button class="bg-emerald-500 text-white rounded gap-2 p-2">
+            <PlusCircleIcon class="size-6 stoke-2"></PlusCircleIcon>
+          </button>
+        </h4>
+
+        <div class="space-y-4">
+          <Accordion
+            label="Parents" 
+            class="bg-sky-100 activity-card rounded shadow"
+            open
+          >
+            <ul class="space-y-2">
+              <template  v-for="parent in child.parents">
+                <li class="p-4 bg-sky-50 shadow rounded">
+                  <p class="font-semibold text-lg mb-2">
+                    {{ parent.first_name }} {{  parent.last_name }}
+                  </p>
+
+                  <p class="text-sm"><span class="font-semibold">Email:</span> <span>{{ parent.email }}</span></p>
+
+                  <p class="text-sm"><span class="font-semibold">Tél:</span> <span>{{ parent.phone }}</span></p>
+                </li>
+              </template>
+            </ul>
+          </Accordion>
+
+
+          <Accordion
+            label="Maladies" 
+            class="bg-sky-100 activity-card rounded shadow"
+            open
+          >
+            <ul class="space-y-2">
+              <template  v-for="illness in child.health.illnesses">
+                <li class="flex gap-2 p-4 bg-sky-50 shadow rounded">
+                  {{  illness }}
+                </li>
+              </template>
+            </ul>
+          </Accordion>
+
           
         </div>
       </div>
@@ -141,7 +186,7 @@
 <script setup>
 import { ref, computed, onMounted, reactive } from 'vue'
 import Accordion from '../components/Accordion.vue';
-import { ArrowPathIcon, CakeIcon, ChatBubbleBottomCenterTextIcon, MoonIcon, NewspaperIcon, PlusCircleIcon } from '@heroicons/vue/24/outline';
+import { ArrowPathIcon, CakeIcon, ChatBubbleBottomCenterTextIcon, MoonIcon, NewspaperIcon, PlusCircleIcon, InformationCircleIcon } from '@heroicons/vue/24/outline';
 import { timeFromValue, transmissions, readableTime, transmissionByDate, getResumeOfTheDay, readableDay, messages } from '../utils/data.js'
 import Select from '../components/Select.vue'
 
