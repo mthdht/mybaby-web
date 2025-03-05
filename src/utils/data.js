@@ -291,14 +291,14 @@ export const child = {
         "note": "À utiliser en cas de crise d'asthme"
       }
     ],
-    "additional_notes": [
-      {
-        id: 1,
-        note: "Éviter les environnements trop poussiéreux.",
-        severity: 'danger'
-      }
-    ]
   },
+  "additional_notes": [
+    {
+      id: 1,
+      note: "Éviter les environnements trop poussiéreux.",
+      severity: 'danger'
+    }
+  ],
   "created_at": "2023-08-16T08:00:00",
   "updated_at": "2023-08-16T08:00:00"
 }

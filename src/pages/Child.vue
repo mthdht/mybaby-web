@@ -57,7 +57,7 @@
           </button>
         </h4>
 
-        <div class="space-y-4">
+        <div class="space-y-4" v-if="transmissions">
           <Accordion
             :label="readableDay(transmission[0])" 
             class="bg-sky-100 activity-card rounded shadow"
@@ -81,9 +81,9 @@
               </li>
             </ul>
           </Accordion>
-
-          
         </div>
+
+        <p v-else>Aucune activité !</p>
       </div>
       
       <div v-else-if="activeTab === 'messages'" class="space-y-4 p-4">
@@ -166,7 +166,7 @@
             label="Maladies" 
             class="bg-sky-100 activity-card rounded shadow"
           >
-            <ul class="space-y-2">
+            <ul class="space-y-2" v-if="child.health.illnesses">
               <template  v-for="illness in child.health.illnesses">
                 <li class="p-4 bg-sky-50 shadow rounded">
                   <p class="font-semibold mb-2">
@@ -177,13 +177,15 @@
                 </li>
               </template>
             </ul>
+
+            <p v-else class="text-gray-500 italic">Aucun maladie coonu à ce jour.</p>
           </Accordion>
 
           <Accordion
             label="Allergies" 
             class="bg-sky-100 activity-card rounded shadow"
           >
-            <ul class="space-y-2">
+            <ul class="space-y-2" v-if="child.health.allergies">
               <template  v-for="allergy in child.health.allergies">
                 <li class="p-4 bg-sky-50 shadow rounded">
                   <p class="font-semibold mb-2 flex justify-between">
@@ -196,13 +198,15 @@
                 </li>
               </template>
             </ul>
+
+            <p v-else class="text-gray-500 italic">Aucun allergie connu à ce jour.</p>
           </Accordion>
 
           <Accordion
             label="Medications" 
             class="bg-sky-100 activity-card rounded shadow"
           >
-            <ul class="space-y-2">
+            <ul class="space-y-2" v-if="child.health.medications">
               <template  v-for="medication in child.health.medications">
                 <li class="p-4 bg-sky-50 shadow rounded">
                   <p class="font-semibold mb-2 flex justify-between">
@@ -217,14 +221,16 @@
                 </li>
               </template>
             </ul>
+
+            <p v-else class="text-gray-500 italic">Aucun medication requise.</p>
           </Accordion>
 
           <Accordion
             label="Informations complémentaire" 
             class="bg-sky-100 activity-card rounded shadow"
           >
-            <ul class="space-y-2">
-              <template  v-for="note in child.health.additional_notes">
+            <ul class="space-y-2" v-if="child.additional_notes">
+              <template  v-for="note in child.additional_notes">
                 <li class="p-4 bg-sky-50 shadow rounded">
                   <p class=" text-sm flex gap-2">
                     <component :is="noteSeverityIcon(note)" class="size-6"></component>
@@ -233,6 +239,8 @@
                 </li>
               </template>
             </ul>
+            
+            <p v-else class="text-gray-500 italic">Aucun notes.</p>
           </Accordion>
         </div>
       </div>
