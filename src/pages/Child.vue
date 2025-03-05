@@ -17,20 +17,20 @@
 
 
       <!-- Tabs ou sections de contenu -->
-      <section class="tabs flex gap-4 font-semibold">
-        <button class="tab-btn border-2 border-sky-500 text-sky-500 p-1 rounded w-1/3 " 
+      <section class="tabs flex gap-2 font-semibold">
+        <button class="tab-btn border-2 border-sky-500 text-sky-500 bg-sky-50 p-1 rounded w-1/3 " 
           :class="{ 'bg-sky-500 text-white': activeTab === 'activities' }" @click="activeTab = 'activities'"
         >
           Activités 
         </button>
 
-        <button class="tab-btn border-2 border-emerald-500 text-emerald-500 p-1 rounded w-1/3 " 
-          :class="{ 'bg-emerald-500 text-white': activeTab === 'messages' }" @click="activeTab = 'messages'"
+        <button class="tab-btn border-2 border-sky-500 text-sky-500 bg-sky-50 p-1 rounded w-1/3 " 
+          :class="{ 'bg-sky-500 text-white': activeTab === 'messages' }" @click="activeTab = 'messages'"
         >
           Messages
         </button>
-        <button class="tab-btn border-2 border-yellow-500 p-1 rounded w-1/3 " 
-          :class="{ 'bg-yellow-500 text-white': activeTab === 'informations', 'text-yellow-500': activeTab !== 'informations' }" @click="activeTab = 'informations'"
+        <button class="tab-btn border-2 border-sky-500 text-sky-500 bg-sky-50 p-1 rounded w-1/3 " 
+          :class="{ 'bg-sky-500 text-white': activeTab === 'informations' }" @click="activeTab = 'informations'"
           >
           Infos
         </button>
