@@ -99,8 +99,8 @@
         </h4>
 
         <section class="filters grid grid-cols-2 gap-2">
-            <Select v-model="filters.severity" :options="[{label: 'Info', value: 'info'}, {label: 'Danger', value: 'danger'}]" placeholder="Type" class=""></Select>
-            <Select v-model="filters.target" :options="[{label: 'Tous', value: 'all'}, {label: 'Creche', value: 'creche'}]" placeholder="Destinataire" class=""></Select>
+            <Select v-model="filters.severity" :options="severityOptions" placeholder="Types" class=""></Select>
+            <Select v-model="filters.target" :options="targetOptions" placeholder="Destinataire" class=""></Select>
         </section>
 
         <div v-if="messages.length > 0" class="space-y-4">
@@ -160,6 +160,21 @@ const filters = reactive({
     severity: "",
     target: "",
 })
+
+const severityOptions = [
+  {label: 'Tous les types', value: null},
+  {label: 'Information', value: 'info'},
+  {label: 'Attention', value: 'warning'},
+  {label: 'Important', value: 'danger'},
+]
+
+const targetOptions = [
+  {label: 'Tout destinataires', value: null},
+  {label: 'Enfant', value: 'child'},
+  {label: 'Crèche', value: 'creche'},
+  {label: 'Générale', value: 'all'},
+]
+
 
 const filteredMessages = computed(() => {
     return messages

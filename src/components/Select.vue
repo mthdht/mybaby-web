@@ -1,7 +1,7 @@
 <template>
     <div class="select-wrapper relative">
         <button class="select px-3 py-1 rounded border flex justify-between items-center font-semibold shadow w-full cursor-pointer focus:ring focus-ring-sky-500" @click="showOptions = !showOptions">
-            <p>{{  model || props.placeholder }}</p>
+            <p>{{  options.find(option => option.value == model)?.label || props.placeholder }}</p>
             <ChevronDownIcon class="size-5 stroke-2"></ChevronDownIcon>
         </button>
         
