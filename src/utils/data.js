@@ -290,6 +290,13 @@ export const child = {
         "dosage": "2 inhalations si nécessaire",
         "note": "À utiliser en cas de crise d'asthme"
       }
+    ],
+    "additional_notes": [
+      {
+        id: 1,
+        note: "Éviter les environnements trop poussiéreux.",
+        severity: 'danger'
+      }
     ]
   },
   "created_at": "2023-08-16T08:00:00",

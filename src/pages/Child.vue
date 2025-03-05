@@ -219,7 +219,21 @@
             </ul>
           </Accordion>
 
-          
+          <Accordion
+            label="Informations complémentaire" 
+            class="bg-sky-100 activity-card rounded shadow"
+          >
+            <ul class="space-y-2">
+              <template  v-for="note in child.health.additional_notes">
+                <li class="p-4 bg-sky-50 shadow rounded">
+                  <p class=" text-sm flex gap-2">
+                    <component :is="noteSeverityIcon(note)" class="size-6"></component>
+                    {{ note.note }}
+                  </p>
+                </li>
+              </template>
+            </ul>
+          </Accordion>
         </div>
       </div>
     </Transition>
@@ -229,7 +243,7 @@
 <script setup>
 import { ref, computed, onMounted, reactive } from 'vue'
 import Accordion from '../components/Accordion.vue';
-import { ArrowPathIcon, CakeIcon, ChatBubbleBottomCenterTextIcon, MoonIcon, NewspaperIcon, PlusCircleIcon, InformationCircleIcon } from '@heroicons/vue/24/outline';
+import { ArrowPathIcon, CakeIcon, ChatBubbleBottomCenterTextIcon, MoonIcon, NewspaperIcon, PlusCircleIcon, InformationCircleIcon, ExclamationTriangleIcon, ExclamationCircleIcon } from '@heroicons/vue/24/outline';
 import { timeFromValue, transmissions, readableTime, transmissionByDate, getResumeOfTheDay, readableDay, messages, child } from '../utils/data.js'
 import Select from '../components/Select.vue'
 
@@ -331,7 +345,6 @@ const messageTypeClass = (target) => {
 
 
 const allergyBadgeClass = (severity) => {
-  console.log(severity)
   return {
     'border-red-500 bg-red-50': severity === 'forte',
     'border-yellow-500 bg-yellow-50': severity === 'moyenne',
@@ -348,5 +361,12 @@ const messageTargetLabel = (target) => {
   }[target] || 'Inconnu'
 }
 
+const noteSeverityIcon = (note) => {
+  return {
+    'info': InformationCircleIcon,
+    'warning': ExclamationCircleIcon,
+    'danger': ExclamationTriangleIcon
+  }[note.severity]
+}
 </script>
   
