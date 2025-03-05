@@ -149,7 +149,7 @@
             <ul class="space-y-2">
               <template  v-for="parent in child.parents">
                 <li class="p-4 bg-sky-50 shadow rounded">
-                  <p class="font-semibold text-lg mb-2">
+                  <p class="font-semibold mb-2">
                     {{ parent.first_name }} {{  parent.last_name }}
                   </p>
 
@@ -169,8 +169,32 @@
           >
             <ul class="space-y-2">
               <template  v-for="illness in child.health.illnesses">
-                <li class="flex gap-2 p-4 bg-sky-50 shadow rounded">
-                  {{  illness }}
+                <li class="p-4 bg-sky-50 shadow rounded">
+                  <p class="font-semibold mb-2">
+                    {{ illness.name }}
+                  </p>
+
+                  <p class="text-sm">{{ illness.description }}</p>
+                </li>
+              </template>
+            </ul>
+          </Accordion>
+
+          <Accordion
+            label="Allergies" 
+            class="bg-sky-100 activity-card rounded shadow"
+            open
+          >
+            <ul class="space-y-2">
+              <template  v-for="allergy in child.health.allergies">
+                <li class="p-4 bg-sky-50 shadow rounded">
+                  <p class="font-semibold mb-2 flex justify-between">
+                    {{ allergy.name }}
+
+                    <span class="rounded-full border px-2 py-1 font-normal text-xs" :class="allergyBadgeClass(allergy.severity)">{{ allergy.severity }}</span>
+                  </p>
+
+                  <p class="text-sm">{{ allergy.description }}</p>
                 </li>
               </template>
             </ul>
@@ -187,7 +211,7 @@
 import { ref, computed, onMounted, reactive } from 'vue'
 import Accordion from '../components/Accordion.vue';
 import { ArrowPathIcon, CakeIcon, ChatBubbleBottomCenterTextIcon, MoonIcon, NewspaperIcon, PlusCircleIcon, InformationCircleIcon } from '@heroicons/vue/24/outline';
-import { timeFromValue, transmissions, readableTime, transmissionByDate, getResumeOfTheDay, readableDay, messages } from '../utils/data.js'
+import { timeFromValue, transmissions, readableTime, transmissionByDate, getResumeOfTheDay, readableDay, messages, child } from '../utils/data.js'
 import Select from '../components/Select.vue'
 
 
@@ -198,69 +222,6 @@ onMounted(() => {
 
   observer.observe(intercept.value);
 })
-
-const child = {
-  "id": 1,
-  "name": "Oscar Dupont",
-  "first_name": "Oscar",
-  "last_name": "Dupont",
-  "birth_date": "2023-08-15",
-  "sex": "male",
-  "avatar": "https://placekitten.com/200/200",
-  "parents": [
-    {
-      "id": 1,
-      "first_name": "Alice",
-      "last_name": "Dupont",
-      "relationship": "mère",
-      "phone": "+1234567890",
-      "email": "alice.dupont@example.com"
-    },
-    {
-      "id": 2,
-      "first_name": "Marc",
-      "last_name": "Dupont",
-      "relationship": "père",
-      "phone": "+0987654321",
-      "email": "marc.dupont@example.com"
-    }
-  ],
-  "health": {
-    "id": 1,
-    "child_id": 1,
-    "allergies": [
-      {
-        "id": 1,
-        "name": "Pollen",
-        "severity": "moyenne",
-        "description": "Réactions légères pendant la saison des allergies"
-      },
-      {
-        "id": 2,
-        "name": "Arachides",
-        "severity": "forte",
-        "description": "Risque de choc anaphylactique en cas de contact"
-      }
-    ],
-    "illnesses": [
-      {
-        "id": 1,
-        "name": "Asthme",
-        "description": "Présence d'asthme léger, suivi médical régulier"
-      }
-    ],
-    "medications": [
-      {
-        "id": 1,
-        "name": "Ventoline",
-        "dosage": "2 inhalations si nécessaire",
-        "notes": "À utiliser en cas de crise d'asthme"
-      }
-    ]
-  },
-  "created_at": "2023-08-16T08:00:00",
-  "updated_at": "2023-08-16T08:00:00"
-}
 
 const activeTab = ref('activities')
 const headerShadow = ref()
@@ -349,6 +310,16 @@ const messageTypeClass = (target) => {
   }
 }
 
+
+const allergyBadgeClass = (severity) => {
+  console.log(severity)
+  return {
+    'border-red-500 bg-red-50': severity === 'forte',
+    'border-yellow-500 bg-yellow-50': severity === 'moyenne',
+    'border-sky-500 bg-sky-50': severity === 'legère',
+    'border-gray-500 bg-gray-50': severity === 'default'
+  }
+}
 // Texte du badge en fonction du type de message
 const messageTargetLabel = (target) => {
   return {

@@ -231,7 +231,70 @@ export const messages = [
       message: 'Oscar semblait un peu fatigué aujourd’hui en fin de journée. Peut-être une bonne nuit de sommeil l’aidera !',
       created_at: '2025-03-10 16:20:00'
     }
-  ]
+]
+
+export const child = {
+  "id": 1,
+  "name": "Oscar Dupont",
+  "first_name": "Oscar",
+  "last_name": "Dupont",
+  "birth_date": "2023-08-15",
+  "sex": "male",
+  "avatar": "https://placekitten.com/200/200",
+  "parents": [
+    {
+      "id": 1,
+      "first_name": "Alice",
+      "last_name": "Dupont",
+      "relationship": "mère",
+      "phone": "+1234567890",
+      "email": "alice.dupont@example.com"
+    },
+    {
+      "id": 2,
+      "first_name": "Marc",
+      "last_name": "Dupont",
+      "relationship": "père",
+      "phone": "+0987654321",
+      "email": "marc.dupont@example.com"
+    }
+  ],
+  "health": {
+    "id": 1,
+    "child_id": 1,
+    "allergies": [
+      {
+        "id": 1,
+        "name": "Pollen",
+        "severity": "moyenne",
+        "description": "Réactions légères pendant la saison des allergies"
+      },
+      {
+        "id": 2,
+        "name": "Arachides",
+        "severity": "forte",
+        "description": "Risque de choc anaphylactique en cas de contact"
+      }
+    ],
+    "illnesses": [
+      {
+        "id": 1,
+        "name": "Asthme",
+        "description": "Présence d'asthme léger, suivi médical régulier"
+      }
+    ],
+    "medications": [
+      {
+        "id": 1,
+        "name": "Ventoline",
+        "dosage": "2 inhalations si nécessaire",
+        "notes": "À utiliser en cas de crise d'asthme"
+      }
+    ]
+  },
+  "created_at": "2023-08-16T08:00:00",
+  "updated_at": "2023-08-16T08:00:00"
+}
   
 
 
