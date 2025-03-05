@@ -11,25 +11,25 @@
         </div>
         <div class="info">
           <h3 class="font-semibold text-2xl">{{ child.name }}</h3>
-          <p class="text-slate-500">{{ child.age }} | <span :class="{ 'text-sky-500': child.sexe === 'male', 'text-pink-500': child.sexe === 'female' }">{{ child.sexe == 'male' ? 'Garçon': 'Fille' }}</span></p>
+          <p class="text-slate-500">{{ calculateAge(child.birth_date) }} | <span :class="{ 'text-sky-500': child.sexe === 'male', 'text-pink-500': child.sexe === 'female' }">{{ child.sexe == 'male' ? 'Garçon': 'Fille' }}</span></p>
         </div>
       </header>
 
 
       <!-- Tabs ou sections de contenu -->
       <section class="tabs flex gap-4 font-semibold">
-        <button class="tab-btn border-2 border-sky-500 text-sky-500 py-2 px-4 rounded w-1/3 " 
+        <button class="tab-btn border-2 border-sky-500 text-sky-500 p-1 rounded w-1/3 " 
           :class="{ 'bg-sky-500 text-white': activeTab === 'activities' }" @click="activeTab = 'activities'"
         >
           Activités 
         </button>
 
-        <button class="tab-btn border-2 border-emerald-500 text-emerald-500 py-2 px-4 rounded w-1/3 " 
+        <button class="tab-btn border-2 border-emerald-500 text-emerald-500 p-1 rounded w-1/3 " 
           :class="{ 'bg-emerald-500 text-white': activeTab === 'messages' }" @click="activeTab = 'messages'"
         >
           Messages
         </button>
-        <button class="tab-btn border-2 border-yellow-500 py-2 px-4 rounded w-1/3 " 
+        <button class="tab-btn border-2 border-yellow-500 p-1 rounded w-1/3 " 
           :class="{ 'bg-yellow-500 text-white': activeTab === 'informations', 'text-yellow-500': activeTab !== 'informations' }" @click="activeTab = 'informations'"
           >
           Infos
@@ -145,11 +145,76 @@ import { ArrowPathIcon, CakeIcon, ChatBubbleBottomCenterTextIcon, MoonIcon, News
 import { timeFromValue, transmissions, readableTime, transmissionByDate, getResumeOfTheDay, readableDay, messages } from '../utils/data.js'
 import Select from '../components/Select.vue'
 
+
+onMounted(() => {
+  const observer = new IntersectionObserver(([entry]) => {
+    headerShadow.value.classList.toggle("shadow", !entry.isIntersecting);
+  });
+
+  observer.observe(intercept.value);
+})
+
 const child = {
-  name: "Henry Dubois",
-  age: "6 mois",
-  sexe: "male",
-  avatar: "https://placekitten.com/200/200"
+  "id": 1,
+  "name": "Oscar Dupont",
+  "first_name": "Oscar",
+  "last_name": "Dupont",
+  "birth_date": "2023-08-15",
+  "sex": "male",
+  "avatar": "https://placekitten.com/200/200",
+  "parents": [
+    {
+      "id": 1,
+      "first_name": "Alice",
+      "last_name": "Dupont",
+      "relationship": "mère",
+      "phone": "+1234567890",
+      "email": "alice.dupont@example.com"
+    },
+    {
+      "id": 2,
+      "first_name": "Marc",
+      "last_name": "Dupont",
+      "relationship": "père",
+      "phone": "+0987654321",
+      "email": "marc.dupont@example.com"
+    }
+  ],
+  "health": {
+    "id": 1,
+    "child_id": 1,
+    "allergies": [
+      {
+        "id": 1,
+        "name": "Pollen",
+        "severity": "moyenne",
+        "description": "Réactions légères pendant la saison des allergies"
+      },
+      {
+        "id": 2,
+        "name": "Arachides",
+        "severity": "forte",
+        "description": "Risque de choc anaphylactique en cas de contact"
+      }
+    ],
+    "illnesses": [
+      {
+        "id": 1,
+        "name": "Asthme",
+        "description": "Présence d'asthme léger, suivi médical régulier"
+      }
+    ],
+    "medications": [
+      {
+        "id": 1,
+        "name": "Ventoline",
+        "dosage": "2 inhalations si nécessaire",
+        "notes": "À utiliser en cas de crise d'asthme"
+      }
+    ]
+  },
+  "created_at": "2023-08-16T08:00:00",
+  "updated_at": "2023-08-16T08:00:00"
 }
 
 const activeTab = ref('activities')
@@ -184,14 +249,6 @@ const filteredMessages = computed(() => {
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
 })
 
-onMounted(() => {
-  const observer = new IntersectionObserver(([entry]) => {
-    headerShadow.value.classList.toggle("shadow", !entry.isIntersecting);
-  });
-
-  observer.observe(intercept.value);
-})
-
 const getIconFromTransmission = (transmission) => {
 
   return  {
@@ -202,9 +259,31 @@ const getIconFromTransmission = (transmission) => {
   
 }
 
-const sortedMessages = computed(() => {
-  return [...messages].sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-})
+const calculateAge = (birthdate) => {
+  const now = new Date();
+  const birthDate = new Date(birthdate);
+  
+  let years = now.getFullYear() - birthDate.getFullYear();
+  let months = now.getMonth() - birthDate.getMonth();
+  
+  // Si le mois actuel est avant le mois de naissance, on retire 1 an et on ajuste les mois
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  // Si l'enfant n'a pas encore un an, afficher en mois uniquement
+  if (years === 0) {
+    return `${months} mois`;
+  }
+
+  // Si l'enfant a plus d'un an, afficher l'âge en années et mois
+  if (months === 0) {
+    return `${years} an${years > 1 ? 's' : ''}`;
+  }
+
+  return `${years} an${years > 1 ? 's' : ''} et ${months} mois`;
+};
 
 // Classe pour la bordure en fonction de la gravité du message
 const messageSeverityClass = (severity) => {
