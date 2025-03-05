@@ -1,6 +1,8 @@
 <template>
     <div class="accordion">
-        <p class="font-semibold flex justify-between items-center cursor-pointer p-4" @click="showContent = !showContent">
+        <p class="font-semibold flex justify-between items-center cursor-pointer p-4"
+            :class="{'border-b border-sky-200': showContent}"
+            @click="showContent = !showContent">
             <span>{{ props.label }}</span>
             <span><ChevronDownIcon class="size-6 stroke-2"></ChevronDownIcon></span>
         </p>
@@ -10,7 +12,7 @@
             enter-from-class="opacity-0 -translate-y-2"
             leave-to-class="opacity-0 -translate-y-2"
         >
-            <div class="accordion-content pt-2 p-4 space-y-4" v-show="showContent">
+            <div class="accordion-content p-4 space-y-4" v-show="showContent">
                 <slot></slot>
             </div>
         </Transition>
