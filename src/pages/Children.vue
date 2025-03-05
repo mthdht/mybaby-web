@@ -1,8 +1,13 @@
 <template>
     <div class="p-4 space-y-4">
-        <h2 class="font-semibold text-xl flex gap-3">
-            <UserIcon class="size-7 text-indigo-500"></UserIcon>
-            Gerer les enfants !
+        <h2 class="font-semibold text-xl flex justify-between">
+            <div class="flex gap-3 items-center">
+                <UserIcon class="size-7 text-indigo-500"></UserIcon>
+                Gerer les enfants !
+            </div>
+            <button class="bg-emerald-500 px-3 py-1 rounded shadow">
+                <UserPlusIcon class="size-7 text-white"></UserPlusIcon>
+            </button>
         </h2>
 
         <div class="wrapper space-y-3">
@@ -17,13 +22,17 @@
                 >
             </section>
 
-            <section class="filters flex justify-between">
-                <Select v-model="filters.creche" :options="[{label: 'Creche 1', value: 'creche 1'}, {label: 'Creche 2', value: 'creche 2'}]" class="w-2/5"></Select>
-                <Select v-model="filters.sort" :options="[{label: 'Nom', value: 'name'}, {label: 'Sexe', value: 'sexe'}]" placeholder="Trier par" class="w-2/5"></Select>
-                
-                <button class="bg-emerald-500 px-3 py-1 rounded shadow">
-                    <UserPlusIcon class="size-7 text-white"></UserPlusIcon>
-                </button>
+            <section class="filters flex justify-between gap-2">
+                <Select v-model="filters.creche" 
+                    :options="[{label: 'Toutes crèches', value: null}, {label: 'Creche 1', value: 'creche 1'}, {label: 'Creche 2', value: 'creche 2'}]" 
+                    class="w-1/2"
+                    placeholder="Trier par crèche"
+                ></Select>
+
+                <Select v-model="filters.sort" 
+                    :options="[{label: 'Aucun tri', value: null}, {label: 'Nom', value: 'name'}, {label: 'Sexe', value: 'sexe'}]" 
+                    placeholder="Trier par" class="w-1/2"
+                ></Select>
             </section>
 
             <p v-if="filteredChildren.length === 0" class="flex gap-4 items-center text-gray-500 border p-4 rounded">
@@ -57,14 +66,14 @@ import { RouterLink } from 'vue-router';
 import { children } from '../utils/data.js'
 
 const filters = reactive({
-    creche: "creche 1",
+    creche: "",
     sort: "",
     search: ""
 })
 
 const filteredChildren = computed(() => {
     return children
-        .filter(child => child.creche == filters.creche)
+        .filter(child => filters.creche ? child.creche == filters.creche : true)
         .filter(child => child.name.toLowerCase().includes(filters.search.toLowerCase()))
         .slice()
         .sort((a, b) => a[filters.sort]?.localeCompare(b[filters.sort]))
