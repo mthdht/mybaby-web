@@ -165,7 +165,6 @@
           <Accordion
             label="Maladies" 
             class="bg-sky-100 activity-card rounded shadow"
-            open
           >
             <ul class="space-y-2">
               <template  v-for="illness in child.health.illnesses">
@@ -183,7 +182,6 @@
           <Accordion
             label="Allergies" 
             class="bg-sky-100 activity-card rounded shadow"
-            open
           >
             <ul class="space-y-2">
               <template  v-for="allergy in child.health.allergies">
@@ -195,6 +193,27 @@
                   </p>
 
                   <p class="text-sm">{{ allergy.description }}</p>
+                </li>
+              </template>
+            </ul>
+          </Accordion>
+
+          <Accordion
+            label="Medications" 
+            class="bg-sky-100 activity-card rounded shadow"
+          >
+            <ul class="space-y-2">
+              <template  v-for="medication in child.health.medications">
+                <li class="p-4 bg-sky-50 shadow rounded">
+                  <p class="font-semibold mb-2 flex justify-between">
+                    {{ medication.name }}
+                  </p>
+
+                  <p class="text-sm">{{ medication.dosage }}</p>
+                  <p class="text-sm flex gap-2 items-center border p-3 mt-2">
+                    <InformationCircleIcon class="size-6"></InformationCircleIcon>
+                    {{ medication.note }}
+                  </p>
                 </li>
               </template>
             </ul>

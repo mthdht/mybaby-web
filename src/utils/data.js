@@ -239,7 +239,7 @@ export const child = {
   "first_name": "Oscar",
   "last_name": "Dupont",
   "birth_date": "2023-08-15",
-  "sex": "male",
+  "sexe": "male",
   "avatar": "https://placekitten.com/200/200",
   "parents": [
     {
@@ -288,7 +288,7 @@ export const child = {
         "id": 1,
         "name": "Ventoline",
         "dosage": "2 inhalations si nécessaire",
-        "notes": "À utiliser en cas de crise d'asthme"
+        "note": "À utiliser en cas de crise d'asthme"
       }
     ]
   },
